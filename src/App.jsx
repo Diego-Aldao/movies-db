@@ -1,5 +1,13 @@
+import EstilosGlobales from "../styles/EstilosGlobales";
+import PaginaPrincipal from "./pages/PaginaPrincipal";
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <>
+      <EstilosGlobales />
+      <PaginaPrincipal />
+    </>
+  );
 }
 
 export default App;
