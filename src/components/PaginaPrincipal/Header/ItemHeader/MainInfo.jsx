@@ -41,6 +41,9 @@ const StyledMainInfo = styled.div`
       }
     }
   }
+  @media (min-width: 1024px) {
+    max-width: 100%;
+  }
 `;
 
 const StyledMovieData = styled.div`

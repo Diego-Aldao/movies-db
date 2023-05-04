@@ -1,17 +1,20 @@
 import ItemHeader from "./ItemHeader/ItemHeader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Parallax } from "swiper";
-
+import styled from "styled-components";
 import "swiper/css";
 
+const StyledSwiper = styled(Swiper)`
+  position: relative;
+  width: 100%;
+  min-height: 75vh;
+  top: 50px;
+`;
+
 const Header = () => {
-  const moviesIds = [438631, 603692, 76600, 677179, 640146];
+  const moviesIds = [603692, 76600, 677179, 640146];
   return (
-    <Swiper
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
+    <StyledSwiper
       slidesPerView={1}
       parallax={true}
       modules={[Parallax]}
@@ -22,7 +25,7 @@ const Header = () => {
           <ItemHeader movieId={id} />
         </SwiperSlide>
       ))}
-    </Swiper>
+    </StyledSwiper>
   );
 };
 

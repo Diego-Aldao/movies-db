@@ -8,33 +8,37 @@ const StyledHeader = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 2;
+  height: 75vh;
+  min-height: 750px;
+  display: flex;
+  align-items: flex-end;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    bottom: -2px;
+    background: linear-gradient(to bottom, #ffffff00, var(--bg-principal) 70%);
+  }
+  @media (min-width: 1024px) {
+    &:after {
+      background: linear-gradient(
+        to bottom,
+        #ffffff00,
+        var(--bg-principal) 110%
+      );
+    }
+    min-height: 85vh;
+  }
   .banner {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
     min-height: 500px;
-    height: 100vw;
     img {
       object-position: 50% 0%;
-    }
-  }
-  .banner:after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    bottom: 0px;
-    background: linear-gradient(to bottom, #ffffff00, var(--bg-principal) 100%);
-  }
-  @media (min-width: 900px) {
-    .banner:after {
-      background: linear-gradient(
-        to bottom,
-        #ffffff00,
-        var(--bg-principal) 65%
-      );
     }
   }
 `;
@@ -46,20 +50,22 @@ const StyledInfo = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   z-index: 2;
-  padding-top: 450px;
   gap: 15px;
+  max-width: 1600px;
+  margin: 0 auto;
+
   h1 {
     font-size: clamp(24px, 6vw, 60px);
     text-align: center;
   }
-  @media (min-width: 580px) {
-    padding-top: 500px;
+  @media (min-width: 768px) {
+    padding: 0px 24px;
   }
   @media (min-width: 1024px) {
     grid-template-columns: 1.3fr 1fr;
     column-gap: 50px;
     row-gap: 0px;
-    padding: 500px 50px 0px;
+    padding: 0px 50px;
     h1 {
       text-align: left;
       grid-column: 1 / 3;
