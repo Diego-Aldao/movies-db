@@ -10,7 +10,7 @@ const StyledNav = styled.div`
   left: 0px;
   background: var(--bg-principal);
   padding-inline: 10px;
-  z-index: 4;
+  z-index: 99;
   svg {
     width: 25px;
     height: 25px;
