@@ -8,7 +8,7 @@ const StyledSwiper = styled(Swiper)`
   position: relative;
   width: 100%;
   min-height: 75vh;
-  top: 50px;
+  margin-top: 50px;
 `;
 
 const Header = () => {
