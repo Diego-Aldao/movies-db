@@ -76,7 +76,7 @@ const StyledSwiper = styled(Swiper)`
   padding-bottom: 40px;
   .swiper-scroll {
     cursor: pointer;
-    background: var(--color-texto-terciario);
+    background: var(--bg-secundario);
     div {
       background: var(--color-principal);
     }
