@@ -2,16 +2,17 @@ import { css } from "styled-components";
 
 const Variables = css`
   :root {
-    --color-principal: #7effb7;
-    --color-secundario: #b2fefa;
-    --gradiente: linear-gradient(to right, #7effb7, #b2fefa);
-    --bg-principal: #0b0c17;
-    --bg-secundario: #333446;
-    --color-texto-principal: #ece6f7;
-    --color-texto-secundario: #bbb8c5;
-    --color-texto-terciario: #a6a1b8;
+    --color-principal: #d6fb41;
+    --color-secundario: #f1ffb9;
+    --gradiente: linear-gradient(to right, #d6fb41, #f1ffb9);
+    --bg-principal: #161616;
+    --bg-secundario: #333438;
+    --color-texto-principal: #f0f0f0;
+    --color-texto-secundario: #c2c2c2;
+    --color-texto-terciario: #a3a3a3;
 
-    --fuente-principal: "Raleway", sans-serif;
+    --fuente-principal: "Cabin", sans-serif;
+    --fuente-secundaria: "Raleway", sans-serif;
   }
 `;
 
