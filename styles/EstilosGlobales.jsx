@@ -27,7 +27,8 @@ h1,h2,h3,p,span{
     line-height: 1.4;
 }
 p,span,svg{
-    color: var(--color-texto-secundario)
+    color: var(--color-texto-secundario);
+    font-family:var(--fuente-secundaria)
 }
 
 img,svg{
