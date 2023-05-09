@@ -36,7 +36,6 @@ const Filtro = ({ options, setState }) => {
     <Select
       className="select"
       defaultValue={options[0]}
-      name="date"
       options={options}
       isSearchable={false}
       styles={styles}
