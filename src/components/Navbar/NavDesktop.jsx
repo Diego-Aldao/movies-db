@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logo from "../Logo";
 import { Icon } from "@iconify/react";
+import Link from "./Link";
 
 const StyledNavDesktop = styled.nav`
   display: none;
@@ -35,9 +36,27 @@ const NavDesktop = () => {
     <StyledNavDesktop>
       <Logo />
       <div className="links">
-        <span>peliculas</span>
-        <span>programas de television</span>
-        <span>actores</span>
+        <Link
+          navigateTo={{
+            categoria: "movie",
+            subCategoria: "popular",
+            titulo: "peliculas",
+          }}
+        />
+        <Link
+          navigateTo={{
+            categoria: "tv",
+            subCategoria: "popular",
+            titulo: "programas-de-television",
+          }}
+        />
+        <Link
+          navigateTo={{
+            categoria: "person",
+            subCategoria: "popular",
+            titulo: "celebridades",
+          }}
+        />
       </div>
       <div className="iconos">
         <Icon icon="tabler:search" />
