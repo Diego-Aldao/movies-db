@@ -25,6 +25,7 @@ h1,h2,h3{
 }
 h1,h2,h3,p,span{
     line-height: 1.4;
+    letter-spacing: 0.4px;
 }
 p,span,svg{
     color: var(--color-texto-secundario);
