@@ -14,7 +14,6 @@ const TopSeries = () => {
       .then((response) => response.json())
       .then((data) => {
         setTopSeries(data.results);
-        console.log(data.results);
       });
   }, []);
 
