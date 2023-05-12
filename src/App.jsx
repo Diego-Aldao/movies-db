@@ -1,4 +1,5 @@
 import EstilosGlobales from "../styles/EstilosGlobales";
+import PaginaDetalle from "./pages/PaginaDetalle";
 import PaginaListas from "./pages/PaginaListas";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/celebridades/:lista",
     element: <PaginaListas />,
+  },
+  {
+    path: "/detalle/:tipo",
+    element: <PaginaDetalle />,
   },
 ]);
 
