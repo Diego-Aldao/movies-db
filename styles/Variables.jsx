@@ -8,7 +8,7 @@ const Variables = css`
     --bg-principal: #161616;
     --bg-secundario: #333438;
     --color-texto-principal: #f0f0f0;
-    --color-texto-secundario: #c2c2c2;
+    --color-texto-secundario: #dfdfdf;
     --color-texto-terciario: #a3a3a3;
 
     --fuente-principal: "Cabin", sans-serif;
