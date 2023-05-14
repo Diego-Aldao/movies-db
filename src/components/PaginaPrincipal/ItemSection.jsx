@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import getPorcentaje from "../../helpers/getPorcentaje";
+import { useNavigate } from "react-router-dom";
 
 const StyledItem = styled.div`
   display: flex;
@@ -43,6 +44,8 @@ const StyledItem = styled.div`
 const IMAGENURL = "https://image.tmdb.org/t/p/w200";
 
 const ItemSection = ({ itemData, mouseOver }) => {
+  const navigate = useNavigate();
+
   const {
     known_for_department,
     gender,
@@ -54,7 +57,12 @@ const ItemSection = ({ itemData, mouseOver }) => {
     vote_average,
     release_date,
     first_air_date,
+    id,
   } = itemData;
+
+  const handleClick = () => {
+    navigate(`/detalle/${media_type}/${id}`);
+  };
 
   const not_actor = media_type !== "person";
 
@@ -62,19 +70,30 @@ const ItemSection = ({ itemData, mouseOver }) => {
 
   const titulo_item = name ? name : title;
 
-  let tipo_persona;
-  if (known_for_department === "Acting" && gender == 1) {
-    tipo_persona = "Actriz";
-  } else if (known_for_department === "Acting" && gender == 2) {
-    tipo_persona = "Actor";
-  } else if (known_for_department === "Directing" && gender == 1) {
-    tipo_persona = "Directora";
-  } else {
-    tipo_persona = "Director";
+  const departamentos = {
+    Acting: "Actor",
+    Actors: "Actores",
+    Art: "Arte",
+    Camera: "Cámara",
+    "Costume & Make-Up": "Vestuario y maquillaje",
+    Creator: "Creador",
+    Crew: "Equipo",
+    Directing: "Dirección",
+    Editing: "Edición",
+    Lighting: "Iluminación",
+    Production: "Producción",
+    Sound: "Sonido",
+    "Visual Effects": "Efectos visuales",
+    Writing: "Guion",
+  };
+  let tipoPersona = departamentos[known_for_department];
+
+  if (tipoPersona === "Actor" && gender == 1) {
+    tipoPersona = "Actriz";
   }
 
   return (
-    <StyledItem onMouseOver={mouseOver}>
+    <StyledItem onMouseOver={mouseOver} onClick={handleClick}>
       <div className="contenedor-img">
         <img
           src={`${IMAGENURL}${path_imagen}`}
@@ -86,7 +105,7 @@ const ItemSection = ({ itemData, mouseOver }) => {
       {not_actor ? (
         <span>{release_date ? release_date : first_air_date}</span>
       ) : (
-        <span>{tipo_persona}</span>
+        <span>{tipoPersona}</span>
       )}
     </StyledItem>
   );
