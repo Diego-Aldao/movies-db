@@ -1,4 +1,3 @@
-import dataSimilar from "../../mocks/SimilarPelicula.json";
 import SectionInitialPage from "../PaginaPrincipal/SectionInitialPage";
 import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
@@ -6,6 +5,9 @@ import getPorcentaje from "../../helpers/getPorcentaje";
 
 const StyledSection = styled(SectionInitialPage)`
   padding: 0px;
+  .swiper {
+    height: auto !important; //la unica manera de sobreescribir esta propiedad del swiper
+  }
   .imagen-similares {
     border-radius: 10px;
     overflow: hidden;
@@ -43,35 +45,30 @@ const breakpoints = {
   },
 };
 
-const Similares = (/* {idPelicula} */) => {
-  const similares = dataSimilar.results
+const Similares = ({ dataSimilares }) => {
+  const similares = dataSimilares.results
     .filter((result) => result.backdrop_path !== null)
     .slice(0, 10);
-  console.log(similares);
   return (
     <StyledSection titulo={"similares"} currentBreakpoints={breakpoints}>
-      {similares.map(
-        ({ id, backdrop_path, poster_path, title, vote_average }) => (
-          <SwiperSlide key={id}>
-            <div className="imagen-similares">
-              <img
-                src={`https://image.tmdb.org/t/p/w300/${
-                  backdrop_path ? backdrop_path : poster_path
-                }`}
-                alt=""
-              />
-            </div>
-            <div className="info-similares">
-              <p>{title}</p>
-              {vote_average ? (
-                <span>{getPorcentaje(vote_average)}%</span>
-              ) : (
-                <span>s/n</span>
-              )}
-            </div>
-          </SwiperSlide>
-        )
-      )}
+      {similares.map(({ id, backdrop_path, title, vote_average, name }) => (
+        <SwiperSlide key={id}>
+          <div className="imagen-similares">
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
+              alt=""
+            />
+          </div>
+          <div className="info-similares">
+            <p>{title ? title : name}</p>
+            {vote_average ? (
+              <span>{getPorcentaje(vote_average)}%</span>
+            ) : (
+              <span>s/n</span>
+            )}
+          </div>
+        </SwiperSlide>
+      ))}
     </StyledSection>
   );
 };
