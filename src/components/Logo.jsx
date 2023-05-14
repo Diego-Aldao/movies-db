@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const StyledLogo = styled.span`
+const StyledLogo = styled(Link)`
   font-weight: 700;
   font-size: clamp(20px, 3vw, 32px);
   color: var(--color-texto-principal);
@@ -12,7 +13,7 @@ const StyledLogo = styled.span`
 `;
 
 const Logo = () => {
-  return <StyledLogo>Nyxaster</StyledLogo>;
+  return <StyledLogo to="/">Nyxaster</StyledLogo>;
 };
 
 export default Logo;
