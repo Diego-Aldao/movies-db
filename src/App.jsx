@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <PaginaListas />,
   },
   {
-    path: "/detalle/:tipo",
+    path: "/detalle/:tipo/:id",
     element: <PaginaDetalle />,
   },
 ]);
