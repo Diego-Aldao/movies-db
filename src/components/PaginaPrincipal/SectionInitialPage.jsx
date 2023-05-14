@@ -110,9 +110,11 @@ const SectionInitialPage = ({
   filtros,
   imagen,
   banner,
+  className,
+  currentSpace,
 }) => {
   return (
-    <StyledSection imagen={imagen} banner={banner}>
+    <StyledSection imagen={imagen} banner={banner} className={className}>
       <StyledHeader>
         <h2>{titulo}</h2>
         {filtros}
@@ -130,7 +132,7 @@ const SectionInitialPage = ({
         modules={[FreeMode, Scrollbar]}
         freeMode={true}
         slidesPerView={1.85}
-        spaceBetween={15}
+        spaceBetween={currentSpace ? currentSpace : 15}
         breakpoints={{
           480: {
             slidesPerView: 3.85,
