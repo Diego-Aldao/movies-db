@@ -1,6 +1,7 @@
-import SectionInitialPage from "../PaginaPrincipal/SectionInitialPage";
+import SectionInitialPage from "../../SectionPage";
 import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const StyledSection = styled(SectionInitialPage)`
   margin-top: 20px;
@@ -61,28 +62,42 @@ const breakpoints = {
 
 const Cast = ({ cast }) => {
   const mainCast = cast.cast.slice(0, 8);
+  const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    navigate(`/detalle/person/${id}`);
+  };
   return (
-    <StyledSection
-      titulo={"reparto principal"}
-      currentBreakpoints={breakpoints}
-    >
-      {mainCast.map((persona) => (
-        <SwiperSlide key={persona.id}>
-          <ItemCast>
-            <div className="imagen-persona">
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${persona.profile_path}`}
-                alt=""
-              />
-            </div>
-            <div className="info-persona">
-              <p className="nombre">{persona.name}</p>
-              <p>{persona.character}</p>
-            </div>
-          </ItemCast>
-        </SwiperSlide>
-      ))}
-    </StyledSection>
+    <>
+      {mainCast.length >= 1 && (
+        <StyledSection
+          titulo={"reparto principal"}
+          currentBreakpoints={breakpoints}
+        >
+          {mainCast.map((persona) => (
+            <SwiperSlide
+              key={persona.id}
+              onClick={() => {
+                handleClick(persona.id);
+              }}
+            >
+              <ItemCast>
+                <div className="imagen-persona">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${persona.profile_path}`}
+                    alt=""
+                  />
+                </div>
+                <div className="info-persona">
+                  <p className="nombre">{persona.name}</p>
+                  <p>{persona.character}</p>
+                </div>
+              </ItemCast>
+            </SwiperSlide>
+          ))}
+        </StyledSection>
+      )}
+    </>
   );
 };
 
