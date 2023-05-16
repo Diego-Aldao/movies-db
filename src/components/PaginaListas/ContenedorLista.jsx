@@ -71,9 +71,10 @@ const ContenedorLista = ({
     <>
       <StyledContenedor data_type={data_type}>
         {dataSubCategoria &&
-          dataSubCategoria.map((item) => (
-            <ItemLista key={item.id} info={item} />
-          ))}
+          dataSubCategoria.map((item) => {
+            const newItem = { ...item, media_type: data_type };
+            return <ItemLista key={newItem.id} info={newItem} />;
+          })}
       </StyledContenedor>
       {data_type !== "person" ? (
         <StyledButton data_type={data_type} onClick={handleClick}>
