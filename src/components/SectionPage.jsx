@@ -103,7 +103,7 @@ const StyledSwiper = styled(Swiper)`
   }
 `;
 
-const SectionInitialPage = ({
+const SectionPage = ({
   children,
   currentBreakpoints,
   titulo,
@@ -153,4 +153,4 @@ const SectionInitialPage = ({
   );
 };
 
-export default SectionInitialPage;
+export default SectionPage;
