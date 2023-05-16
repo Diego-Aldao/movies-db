@@ -7,7 +7,7 @@ const StyledFooter = styled.footer`
   grid-template-columns: repeat(auto-fill, 1fr);
   gap: 25px;
   padding: 50px 10px;
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
   div,
   ul {

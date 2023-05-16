@@ -9,10 +9,12 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   min-height: 75vh;
   margin-top: 50px;
+  cursor: pointer;
 `;
 
 const Header = () => {
   const moviesIds = [603692, 76600, 677179, 640146];
+
   return (
     <StyledSwiper
       slidesPerView={1}

@@ -63,7 +63,6 @@ const ContenedorFiltros = ({
 
   useEffect(() => {
     if (!listaFiltrada) return;
-    console.log(listaFiltrada);
     setDataSubCategoria(listaFiltrada.results);
   }, [listaFiltrada]);
 

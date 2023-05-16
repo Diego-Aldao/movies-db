@@ -113,7 +113,7 @@ const StyledMovieData = styled.div`
 
 const MainInfo = ({ mainInfo }) => {
   return (
-    <StyledMainInfo>
+    <StyledMainInfo data-swiper-parallax="-55%">
       <StyledMovieData>
         <ul className="lista-datos">
           <li className="año">
@@ -142,7 +142,7 @@ const MainInfo = ({ mainInfo }) => {
         </div>
       </StyledMovieData>
       <p>
-        {mainInfo?.overview} <span>ver descripcion</span>
+        {mainInfo?.overview} <span>ver detalle</span>
       </p>
     </StyledMainInfo>
   );

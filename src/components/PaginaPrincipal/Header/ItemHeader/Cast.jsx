@@ -37,7 +37,7 @@ const StyledCast = styled.div`
 
 const Cast = ({ cast }) => {
   return (
-    <StyledCast>
+    <StyledCast data-swiper-parallax="-55%">
       <h2>cast</h2>
       {cast?.map((actor) => (
         <div className="cast-item" key={actor.id}>

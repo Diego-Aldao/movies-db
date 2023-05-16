@@ -9,8 +9,14 @@ const StyledNav = styled.div`
   top: 0px;
   left: 0px;
   background: var(--bg-principal);
-  padding-inline: 10px;
   z-index: 99;
+  .contenedor-nav {
+    padding-inline: 10px;
+    height: 100%;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
   svg {
     width: 25px;
     height: 25px;
@@ -23,14 +29,15 @@ const StyledNav = styled.div`
     gap: 10px;
   }
   @media (min-width: 768px) {
-    padding: 0px 24px;
     .iconos {
       display: flex;
       gap: 20px;
     }
   }
   @media (min-width: 1024px) {
-    padding: 0px 50px;
+    .contenedor-nav {
+      padding-inline: 50px;
+    }
     svg {
       width: 30px;
       height: 30px;
@@ -41,8 +48,10 @@ const StyledNav = styled.div`
 const Navbar = () => {
   return (
     <StyledNav>
-      <NavMobile />
-      <NavDesktop />
+      <div className="contenedor-nav">
+        <NavMobile />
+        <NavDesktop />
+      </div>
     </StyledNav>
   );
 };

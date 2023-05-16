@@ -9,16 +9,26 @@ const StyledItem = styled.div`
   z-index: 2;
   position: relative;
   height: 100%;
+  background: var(--bg-secundario);
+
   p {
     font-size: 14px;
     font-weight: 600;
-    margin-top: 15px;
-    padding-inline: 5px;
     color: var(--color-texto-principal);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .info {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
   }
   span {
     font-size: 14px;
-    padding-inline: 5px;
   }
   .contenedor-img {
     position: relative;
@@ -37,6 +47,12 @@ const StyledItem = styled.div`
       border: 2px solid var(--color-texto-principal);
       text-transform: uppercase;
       font-size: 12px;
+    }
+  }
+  @media (min-width: 768px) {
+    .info {
+      height: 96px;
+      padding: 10px 15px;
     }
   }
 `;
@@ -97,16 +113,18 @@ const ItemSection = ({ itemData, mouseOver }) => {
       <div className="contenedor-img">
         <img
           src={`${IMAGENURL}${path_imagen}`}
-          alt="poster de pelicula o celebridad en tendencia"
+          alt="poster de pelicula o celebridad"
         />
         {not_actor && <span>{getPorcentaje(vote_average)}</span>}
       </div>
-      <p>{titulo_item}</p>
-      {not_actor ? (
-        <span>{release_date ? release_date : first_air_date}</span>
-      ) : (
-        <span>{tipoPersona}</span>
-      )}
+      <div className="info">
+        <p>{titulo_item}</p>
+        {not_actor ? (
+          <span>{release_date ? release_date : first_air_date}</span>
+        ) : (
+          <span>{tipoPersona}</span>
+        )}
+      </div>
     </StyledItem>
   );
 };
