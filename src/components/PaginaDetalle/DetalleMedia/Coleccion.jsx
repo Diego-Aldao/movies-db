@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import useDetalle from "../../hooks/useDetalle";
+import useDetalle from "../../../hooks/useDetalle";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -54,7 +54,7 @@ const StyledSection = styled.section`
   .lista {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
   }

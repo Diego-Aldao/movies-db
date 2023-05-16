@@ -1,7 +1,7 @@
-import SectionInitialPage from "../SectionPage";
+import SectionInitialPage from "../../SectionPage";
 import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
-import getPorcentaje from "../../helpers/getPorcentaje";
+import getPorcentaje from "../../../helpers/getPorcentaje";
 import { useNavigate } from "react-router-dom";
 
 const StyledSection = styled(SectionInitialPage)`
