@@ -1,7 +1,8 @@
-import SectionInitialPage from "../PaginaPrincipal/SectionInitialPage";
+import SectionInitialPage from "../SectionPage";
 import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
 import getPorcentaje from "../../helpers/getPorcentaje";
+import { useNavigate } from "react-router-dom";
 
 const StyledSection = styled(SectionInitialPage)`
   padding: 0px;
@@ -46,30 +47,54 @@ const breakpoints = {
 };
 
 const Similares = ({ dataSimilares }) => {
+  const navigate = useNavigate();
   const similares = dataSimilares.results
     .filter((result) => result.backdrop_path !== null)
     .slice(0, 10);
+
+  const handleClick = (id, release_date) => {
+    const media_type = release_date ? "movie" : "tv";
+    navigate(`/detalle/${media_type}/${id}`);
+  };
   return (
-    <StyledSection titulo={"similares"} currentBreakpoints={breakpoints}>
-      {similares.map(({ id, backdrop_path, title, vote_average, name }) => (
-        <SwiperSlide key={id}>
-          <div className="imagen-similares">
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
-              alt=""
-            />
-          </div>
-          <div className="info-similares">
-            <p>{title ? title : name}</p>
-            {vote_average ? (
-              <span>{getPorcentaje(vote_average)}%</span>
-            ) : (
-              <span>s/n</span>
-            )}
-          </div>
-        </SwiperSlide>
-      ))}
-    </StyledSection>
+    <>
+      {similares.length >= 1 && (
+        <StyledSection titulo={"similares"} currentBreakpoints={breakpoints}>
+          {similares.map(
+            ({
+              id,
+              backdrop_path,
+              title,
+              vote_average,
+              name,
+              release_date,
+            }) => (
+              <SwiperSlide
+                key={id}
+                onClick={() => {
+                  handleClick(id, release_date);
+                }}
+              >
+                <div className="imagen-similares">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
+                    alt=""
+                  />
+                </div>
+                <div className="info-similares">
+                  <p>{title ? title : name}</p>
+                  {vote_average ? (
+                    <span>{getPorcentaje(vote_average)}%</span>
+                  ) : (
+                    <span>s/n</span>
+                  )}
+                </div>
+              </SwiperSlide>
+            )
+          )}
+        </StyledSection>
+      )}
+    </>
   );
 };
 
