@@ -1,14 +1,15 @@
+import { useEffect } from "react";
 import styled from "styled-components";
-import DataColeccion from "../../mocks/ColeccionPelicula.json";
+import useDetalle from "../../hooks/useDetalle";
 
 const StyledSection = styled.section`
   width: 100%;
   background: ${({ bg }) => `url(${bg})`} no-repeat center / cover;
-  height: 258px;
   position: relative;
   margin-top: 50px;
   display: flex;
   align-items: center;
+  padding: 20px 10px;
   &:after {
     content: "";
     width: 100%;
@@ -16,7 +17,7 @@ const StyledSection = styled.section`
     position: absolute;
     top: 0px;
     left: 0px;
-    background: #000000b0;
+    background: #0000009b;
   }
   .info-coleccion {
     position: relative;
@@ -31,22 +32,31 @@ const StyledSection = styled.section`
     button {
       width: 50%;
       max-width: 200px;
-      background: var(--bg-secundario);
-      border: 1px solid var(--bg-secundario);
+      background: var(--color-principal);
+      border: 1px solid var(--color-principal);
       padding-block: 15px;
+      border-radius: 5px;
       span {
-        color: var(--color-principal);
+        color: var(--bg-secundario);
         text-transform: uppercase;
         font-size: clamp(12px, 2vw, 14px);
-        font-weight: 700;
+        font-weight: 800;
       }
     }
   }
   p:first-letter {
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
   p {
     max-width: 600px;
+  }
+  .descripcion,
+  .lista {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
   p,
   span {
@@ -64,24 +74,36 @@ const StyledSection = styled.section`
 `;
 
 const Coleccion = ({ coleccion }) => {
-  if (!coleccion) return;
-  const { parts } = DataColeccion;
-  const { backdrop_path, name } = coleccion;
+  const { backdrop_path, name, id } = coleccion;
+  const { detalle, getDetalle } = useDetalle();
+
+  useEffect(() => {
+    if (!id) return;
+    const url = `https://api.themoviedb.org/3/collection/${id}?language=es-ES`;
+    getDetalle(url);
+  }, []);
+
   return (
-    <StyledSection bg={`https://image.tmdb.org/t/p/w500${backdrop_path}`}>
-      <div className="info-coleccion">
-        <h2>{name}</h2>
-        <p>
-          incluye:{" "}
-          {parts.map((part) => (
-            <span key={part.id}>{part.title}, </span>
-          ))}
-        </p>
-        <button>
-          <span>ver la colección</span>
-        </button>
-      </div>
-    </StyledSection>
+    <>
+      {detalle && (
+        <StyledSection bg={`https://image.tmdb.org/t/p/w500${backdrop_path}`}>
+          <div className="info-coleccion">
+            <h2>{name}</h2>
+            <p className="descripcion">{detalle.overview}</p>
+            <p className="lista">
+              incluye:
+              {detalle.parts.map((part) => (
+                <span key={part.id}> {part.title} - </span>
+              ))}
+            </p>
+
+            <button>
+              <span>ver la colección</span>
+            </button>
+          </div>
+        </StyledSection>
+      )}
+    </>
   );
 };
 
