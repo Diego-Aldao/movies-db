@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import External from "./External";
-import AboutMedia from "./AboutMedia";
+import External from "../../External";
+import AboutMedia from "./AboutMedia/AboutMedia";
 
 const StyledAside = styled.aside`
   margin-top: 20px;

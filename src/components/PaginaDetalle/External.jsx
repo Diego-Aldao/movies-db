@@ -31,7 +31,7 @@ const External = ({ externalData, homepage }) => {
     <StyledList>
       {newExternalData.map(({ plataforma, link }, index) => (
         <React.Fragment key={index}>
-          {link !== null && (
+          {link && (
             <li>
               <a
                 href={`https://www.${plataforma}.com/${link}`}

@@ -1,13 +1,13 @@
-import SectionInitialPage from "../../PaginaPrincipal/SectionInitialPage";
 import { SwiperSlide } from "swiper/react";
 import Filtros from "./Filtros";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import useDetalle from "../../../hooks/useDetalle";
 import Videos from "./Videos";
 import Imagenes from "./Imagenes";
+import SectionPage from "../../../SectionPage";
+import useDetalle from "../../../../hooks/useDetalle";
 
-const StyledSection = styled(SectionInitialPage)`
+const StyledSection = styled(SectionPage)`
   padding: 0px;
   margin-top: 0px;
   max-width: 100%;
