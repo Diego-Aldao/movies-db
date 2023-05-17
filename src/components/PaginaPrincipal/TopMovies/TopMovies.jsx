@@ -1,28 +1,33 @@
 import { SwiperSlide } from "swiper/react";
-import SectionInitialPage from "../SectionInitialPage";
 import ItemSection from "../ItemSection";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import SectionPage from "../../SectionPage";
+import useDetalle from "../../../hooks/useDetalle";
+
+const URL = `https://api.themoviedb.org/3/movie/top_rated?language=es-ES&page=1&region=AR`;
 
 const TopMovies = () => {
-  const [topMovies, setTopMovies] = useState();
-
-  const KEY = import.meta.env.VITE_API_KEY;
-  const URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${KEY}&language=es-ES&page=1&region=AR`;
+  const { detalle, getDetalle } = useDetalle();
 
   useEffect(() => {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => setTopMovies(data.results));
+    getDetalle(URL);
   }, []);
 
   return (
-    <SectionInitialPage titulo={"peliculas mejor valoradas"}>
-      {topMovies?.map((movie) => (
-        <SwiperSlide key={movie.id}>
-          <ItemSection itemData={movie} />
-        </SwiperSlide>
-      ))}
-    </SectionInitialPage>
+    <>
+      {detalle && (
+        <SectionPage titulo={"peliculas mejor valoradas"}>
+          {detalle.results.map((movie) => {
+            const newMovie = { ...movie, media_type: "movie" };
+            return (
+              <SwiperSlide key={newMovie.id}>
+                <ItemSection itemData={newMovie} />
+              </SwiperSlide>
+            );
+          })}
+        </SectionPage>
+      )}
+    </>
   );
 };
 

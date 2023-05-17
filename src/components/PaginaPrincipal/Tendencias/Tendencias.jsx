@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import ItemSection from "../ItemSection";
 import Filtro from "./Filtro";
-import useTendencias from "../../../hooks/useTendencias";
-import SectionInitialPage from "../SectionInitialPage";
+import SectionPage from "../../SectionPage";
+import background from "../../../assets/trending-bg.svg";
+import useDetalle from "../../../hooks/useDetalle";
 
 const dateOptions = [
   {
@@ -35,22 +36,20 @@ const typeOptions = [
   },
 ];
 
-const URL_BG =
-  "https://www.themoviedb.org/assets/2/v4/misc/trending-bg-39afc2a5f77e31d469b25c187814c0a2efef225494c038098d62317d923f8415.svg";
-
 const Tendencias = () => {
   const [mediaType, setMediaType] = useState("all");
   const [timeWindow, setTimeWindow] = useState("day");
-  const { tendencias, getTendencias } = useTendencias();
+  const { detalle, getDetalle } = useDetalle();
 
   useEffect(() => {
-    getTendencias(timeWindow, mediaType);
+    const url = `https://api.themoviedb.org/3/trending/${mediaType}/${timeWindow}?region=AR?language=es-ES`;
+    getDetalle(url);
   }, [mediaType, timeWindow]);
 
   return (
-    <SectionInitialPage
+    <SectionPage
       titulo={"tendencias"}
-      imagen={URL_BG}
+      imagen={background}
       filtros={
         <>
           <Filtro options={dateOptions} setState={setTimeWindow} />
@@ -58,12 +57,16 @@ const Tendencias = () => {
         </>
       }
     >
-      {tendencias?.map((itemTendencia) => (
-        <SwiperSlide key={itemTendencia.id}>
-          <ItemSection itemData={itemTendencia} />
-        </SwiperSlide>
-      ))}
-    </SectionInitialPage>
+      {detalle && (
+        <>
+          {detalle.results.map((itemTendencia) => (
+            <SwiperSlide key={itemTendencia.id}>
+              <ItemSection itemData={itemTendencia} />
+            </SwiperSlide>
+          ))}
+        </>
+      )}
+    </SectionPage>
   );
 };
 

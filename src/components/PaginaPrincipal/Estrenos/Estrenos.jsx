@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import SectionInitialPage from "../SectionInitialPage";
 import ItemSection from "../ItemSection";
 import { SwiperSlide } from "swiper/react";
+import SectionPage from "../../SectionPage";
+import useDetalle from "../../../hooks/useDetalle";
 
-const KEY = import.meta.env.VITE_API_KEY;
-const URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${KEY}&language=es-ES&page=1&region=AR`;
 const IMAGENURL = "https://image.tmdb.org/t/p/original";
 
 const breakpoints = {
@@ -21,40 +20,47 @@ const breakpoints = {
 };
 
 const Estrenos = () => {
-  const [estrenos, setEstrenos] = useState();
   const [imagenEstreno, setImagenEstreno] = useState("");
+  const { detalle, getDetalle } = useDetalle();
 
   useEffect(() => {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => setEstrenos(data.results));
+    const url = `https://api.themoviedb.org/3/movie/upcoming?language=es-ES&page=1&region=AR`;
+    getDetalle(url);
   }, []);
 
   useEffect(() => {
-    if (!estrenos) return;
-    setImagenEstreno(`${IMAGENURL}${estrenos[0].poster_path}`);
-  }, [estrenos]);
+    if (!detalle) return;
+    setImagenEstreno(`${IMAGENURL}${detalle.results[0].poster_path}`);
+  }, [detalle]);
 
   const handleMouseOver = (estreno) => {
     setImagenEstreno(`${IMAGENURL}${estreno.poster_path}`);
   };
+
   return (
-    <SectionInitialPage
-      titulo={"estrenos"}
-      currentBreakpoints={breakpoints}
-      banner={imagenEstreno}
-    >
-      {estrenos?.map((estreno) => (
-        <SwiperSlide key={estreno.id}>
-          <ItemSection
-            itemData={estreno}
-            mouseOver={() => {
-              handleMouseOver(estreno);
-            }}
-          />
-        </SwiperSlide>
-      ))}
-    </SectionInitialPage>
+    <>
+      {detalle && (
+        <SectionPage
+          titulo={"estrenos"}
+          currentBreakpoints={breakpoints}
+          banner={imagenEstreno}
+        >
+          {detalle.results.map((estreno) => {
+            const newEstreno = { ...estreno, media_type: "movie" };
+            return (
+              <SwiperSlide key={newEstreno.id}>
+                <ItemSection
+                  itemData={newEstreno}
+                  mouseOver={() => {
+                    handleMouseOver(estreno);
+                  }}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </SectionPage>
+      )}
+    </>
   );
 };
 
