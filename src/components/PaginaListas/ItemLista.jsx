@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledItem = styled.div`
@@ -96,6 +97,7 @@ const StyledItem = styled.div`
 `;
 
 const ItemLista = ({ info }) => {
+  const navigate = useNavigate();
   const {
     overview,
     poster_path,
@@ -106,13 +108,20 @@ const ItemLista = ({ info }) => {
     name,
     known_for,
     first_air_date,
+    media_type,
+    id,
   } = info;
 
   const titulo = title ? title : name;
   const path_imagen = poster_path ? poster_path : profile_path;
   const air_date = release_date ? release_date : first_air_date;
+
+  const handleClick = () => {
+    navigate(`/detalle/${media_type}/${id}`);
+  };
+
   return (
-    <StyledItem>
+    <StyledItem onClick={handleClick}>
       <div className="contenedor-img">
         <img src={`https://image.tmdb.org/t/p/w300${path_imagen}`} alt="" />
         {vote_average && <span>{vote_average}</span>}
