@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import getDuracion from "../../../../helpers/getDuracion";
+import getDuracion from "../../../../../helpers/getDuracion";
 
 const StyledAbout = styled.div`
   ul {
@@ -75,11 +75,13 @@ const AboutHeader = ({ dataAbout }) => {
             <li>
               <span>{añoLanzamiento} |</span>
             </li>
-            {genres?.map((genero) => (
-              <li key={genero.id}>
-                <span> · {genero.name}</span>
-              </li>
-            ))}
+            <li>
+              {genres?.map((genero) => (
+                <span key={genero.id} className="genero">
+                  {genero.name}
+                </span>
+              ))}
+            </li>
           </>
         )}
       </ul>
