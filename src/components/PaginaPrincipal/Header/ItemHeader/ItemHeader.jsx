@@ -1,8 +1,9 @@
 import styled from "styled-components";
-
 import { useEffect, useState } from "react";
 import Cast from "./Cast";
 import MainInfo from "./MainInfo";
+import { useNavigate } from "react-router-dom";
+import useDetalle from "../../../../hooks/useDetalle";
 
 const StyledHeader = styled.div`
   position: relative;
@@ -76,47 +77,57 @@ const StyledInfo = styled.div`
 const ItemHeader = ({ movieId }) => {
   const [cast, setCast] = useState([]);
   const [mainInfo, setMainInfo] = useState({});
+  const { detalle, getDetalle } = useDetalle();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const key = import.meta.env.VITE_API_KEY;
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=es-ES`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setMainInfo(data));
+    const url = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits&language=es-ES`;
+    getDetalle(url);
   }, [movieId]);
 
   useEffect(() => {
-    const key = import.meta.env.VITE_API_KEY;
-    const url = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${key}&language=en-US`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setCast(data.cast.slice(0, 4)));
-  }, [movieId]);
+    if (!detalle) return;
+    setMainInfo(detalle);
+    setCast(detalle.credits.cast.slice(0, 4));
+  }, [detalle]);
+
+  const handleClick = () => {
+    const media_type = "movie";
+    navigate(`/detalle/${media_type}/${mainInfo.id}`);
+  };
 
   return (
-    <StyledHeader>
-      <div
-        className="banner"
-        data-swiper-parallax="75%"
-        data-swiper-parallax-scale="1.10"
-      >
-        <picture>
-          <source
-            srcSet={`https://image.tmdb.org/t/p/original/${mainInfo?.poster_path}`}
-            media="(max-width: 580px)"
-          />
-          <img
-            src={`https://image.tmdb.org/t/p/original/${mainInfo?.backdrop_path}`}
-            alt=""
-          />
-        </picture>
-      </div>
-      <StyledInfo>
-        <h1>{mainInfo?.title}</h1>
-        <MainInfo mainInfo={mainInfo} />
-        <Cast cast={cast} />
-      </StyledInfo>
-    </StyledHeader>
+    <>
+      {detalle && (
+        <StyledHeader onClick={handleClick}>
+          <div
+            className="banner"
+            data-swiper-parallax="75%"
+            data-swiper-parallax-scale="1.10"
+          >
+            <picture>
+              <source
+                srcSet={`https://image.tmdb.org/t/p/w500${mainInfo?.poster_path}`}
+                media="(max-width: 580px)"
+              />
+              <source
+                srcSet={`https://image.tmdb.org/t/p/w500${mainInfo?.backdrop_path}`}
+                media="(max-width: 1024px)"
+              />
+              <img
+                src={`https://image.tmdb.org/t/p/w1280${mainInfo?.backdrop_path}`}
+                alt=""
+              />
+            </picture>
+          </div>
+          <StyledInfo>
+            <h1 data-swiper-parallax="-55%">{mainInfo?.title}</h1>
+            <MainInfo mainInfo={mainInfo} />
+            <Cast cast={cast} />
+          </StyledInfo>
+        </StyledHeader>
+      )}
+    </>
   );
 };
 
