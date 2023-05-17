@@ -17,6 +17,9 @@ const StyledBiografia = styled.section`
     font-size: 15px;
     line-height: 1.5;
   }
+  p:first-letter {
+    text-transform: capitalize;
+  }
   @media (min-width: 1024px) {
     h1 {
       display: initial;
@@ -26,13 +29,17 @@ const StyledBiografia = styled.section`
 
 const AboutPersona = ({ data }) => {
   const { biography, name } = data;
+
+  const biografia = !biography
+    ? "ups, parece que aun no hay una biografia en español de esta celebridad"
+    : biography;
   return (
     <StyledBiografia>
       <h1>{name}</h1>
       <header>
         <h2>biografía</h2>
       </header>
-      <p>{biography}</p>
+      <p>{biografia}</p>
     </StyledBiografia>
   );
 };
