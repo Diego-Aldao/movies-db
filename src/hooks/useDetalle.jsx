@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useDetalle = () => {
   const [detalle, setDetalle] = useState();
-
+  const TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
   const handleResponse = (data) => {
     setDetalle(data);
   };
@@ -12,8 +12,7 @@ const useDetalle = () => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MzVkZmE2YmExM2ZhNWFhMWU1NzBiODk1ZjlkMjAzYSIsInN1YiI6IjY0NTI3NmEwMzNhZDhmMDE3MjhkODEyNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PKjZqnxeNVdU1F_AwDCh-0HpfCNP_Ev28-OoQpjQ9MY",
+        Authorization: `Bearer ${TOKEN}`,
       },
     };
 
