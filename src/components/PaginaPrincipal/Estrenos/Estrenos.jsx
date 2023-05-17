@@ -4,7 +4,7 @@ import { SwiperSlide } from "swiper/react";
 import SectionPage from "../../SectionPage";
 import useDetalle from "../../../hooks/useDetalle";
 
-const IMAGENURL = "https://image.tmdb.org/t/p/original";
+const IMAGENURL = "https://image.tmdb.org/t/p/w1280";
 
 const breakpoints = {
   480: {
