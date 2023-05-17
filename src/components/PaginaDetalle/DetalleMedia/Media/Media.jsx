@@ -6,6 +6,7 @@ import Videos from "./Videos";
 import Imagenes from "./Imagenes";
 import SectionPage from "../../../SectionPage";
 import useDetalle from "../../../../hooks/useDetalle";
+import ModalVideo from "./ModalVideo";
 
 const StyledSection = styled(SectionPage)`
   padding: 0px;
@@ -32,6 +33,8 @@ const Media = ({ mediaType, idMedia }) => {
   const [media, setMedia] = useState();
   const [filtros, setFiltros] = useState();
   const [currentMedia, setCurrentMedia] = useState();
+  const [currentVideo, setCurrentVideo] = useState();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/${mediaType}/${idMedia}?append_to_response=images,videos`;
@@ -81,27 +84,36 @@ const Media = ({ mediaType, idMedia }) => {
 
   return (
     <>
-      {media ? (
-        <StyledSection
-          currentSpace={1}
-          titulo={"media"}
-          filtros={
-            <Filtros filtros={filtros} setCurrentMedia={setCurrentMedia} />
-          }
-          currentBreakpoints={breakpoints}
-        >
-          {currentMedia.data.slice(0, 10).map((item, index) => (
-            <SwiperSlide key={index}>
-              {currentMedia.nombre === "videos" ? (
-                <Videos data={item} />
-              ) : (
-                <Imagenes data={item} />
-              )}
-            </SwiperSlide>
-          ))}
-        </StyledSection>
-      ) : (
-        <></>
+      {media && (
+        <>
+          <ModalVideo
+            video={currentVideo}
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
+          />
+          <StyledSection
+            currentSpace={1}
+            titulo={"media"}
+            filtros={
+              <Filtros filtros={filtros} setCurrentMedia={setCurrentMedia} />
+            }
+            currentBreakpoints={breakpoints}
+          >
+            {currentMedia.data.slice(0, 10).map((item, index) => (
+              <SwiperSlide key={index}>
+                {currentMedia.nombre === "videos" ? (
+                  <Videos
+                    data={item}
+                    setCurrentVideo={setCurrentVideo}
+                    setIsVisible={setIsVisible}
+                  />
+                ) : (
+                  <Imagenes data={item} />
+                )}
+              </SwiperSlide>
+            ))}
+          </StyledSection>
+        </>
       )}
     </>
   );
