@@ -19,16 +19,15 @@ const StyledProviders = styled.ul`
 `;
 
 const Providers = ({ providers }) => {
-  const { AR } = providers;
   return (
     <>
-      {AR && (
+      {providers?.AR?.free && (
         <StyledProviders>
           <li>
             <p>ver en:</p>
           </li>
 
-          {AR.free.map((provider) => (
+          {providers.AR.free.map((provider) => (
             <li key={provider.provider_id}>
               <img
                 src={`https://image.tmdb.org/t/p/w92${provider.logo_path}`}

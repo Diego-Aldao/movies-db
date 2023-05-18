@@ -45,9 +45,9 @@ const ModalVideo = ({ video, isVisible, setIsVisible }) => {
   };
 
   const url =
-    video.site === "YouTube"
-      ? `https://www.youtube.com/embed/${video.key}`
-      : `https://player.vimeo.com/video/${video.key}`;
+    video?.site === "YouTube"
+      ? `https://www.youtube.com/embed/${video?.key}`
+      : `https://player.vimeo.com/video/${video?.key}`;
 
   return (
     <>
