@@ -31,11 +31,13 @@ const UsersInfo = ({ userInfo }) => {
 
   return (
     <StyledUsersInfo>
-      <div className="valoracion">
-        <Icon icon="ic:round-star" />
-        <span>{votoFixed}</span>
-        <span>| {vote_count}</span>
-      </div>
+      {votoFixed >= 1 && (
+        <div className="valoracion">
+          <Icon icon="ic:round-star" />
+          <span>{votoFixed}</span>
+          <span>| {vote_count}</span>
+        </div>
+      )}
       <div className="interaccion">
         <Icon icon="ic:round-favorite-border" />
         <Icon icon="ic:outline-bookmark-added" display={"none"} />
