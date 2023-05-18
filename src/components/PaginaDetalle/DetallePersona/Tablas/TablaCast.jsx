@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import comparar from "../../../../helpers/getComparacion";
 
 const TablaCast = ({ cast }) => {
   const tuvoActuaciones = cast;
+  const navigate = useNavigate();
 
   const arrayFormateado = cast.map((item) => {
     if (item.release_date) {
@@ -15,6 +17,10 @@ const TablaCast = ({ cast }) => {
   const arrayOrdenado = arrayFormateado
     .sort((a, b) => comparar(a.first_air_date, b.first_air_date))
     .filter((item) => item.first_air_date);
+
+  const handleClick = (papel) => {
+    navigate(`/detalle/${papel.media_type}/${papel.id}`);
+  };
 
   return (
     <>
@@ -35,7 +41,15 @@ const TablaCast = ({ cast }) => {
                   </td>
                   <td className="descripcion">
                     <p>
-                      {papel.title || papel.name}{" "}
+                      <span
+                        className="titulo"
+                        onClick={() => {
+                          handleClick(papel);
+                        }}
+                      >
+                        {" "}
+                        {papel.title || papel.name}
+                      </span>{" "}
                       {papel.character && (
                         <span className="grupo">
                           {papel.episode_count && (
