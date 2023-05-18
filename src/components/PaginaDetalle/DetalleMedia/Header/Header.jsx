@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import BannerMobile from "./BannerMobile";
-import InfoHeader from "./InfoHeader";
-import AboutHeader from "./AboutHeader";
+import InfoHeader from "./InfoHeader/InfoHeader";
 
 const StyledHeader = styled.header`
   @media (min-width: 768px) {
@@ -26,15 +25,15 @@ const StyledHeader = styled.header`
 
 const Header = ({ data }) => {
   const { backdrop_path, poster_path } = data;
-  const backgroundHeader = `https://image.tmdb.org/t/p/w500/${backdrop_path}`;
+  const backgroundHeader = `https://image.tmdb.org/t/p/w500/${
+    backdrop_path ? backdrop_path : poster_path
+  }`;
   return (
     <StyledHeader background={backgroundHeader}>
       <BannerMobile
         imagenes={{ imagenBg: backdrop_path, imagenPoster: poster_path }}
       />
-      <InfoHeader dataInfo={data}>
-        <AboutHeader dataAbout={data} />
-      </InfoHeader>
+      <InfoHeader dataInfo={data} />
     </StyledHeader>
   );
 };
