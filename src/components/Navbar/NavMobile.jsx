@@ -13,13 +13,13 @@ const StyledNavMobile = styled.nav`
   }
 `;
 
-const NavMobile = () => {
+const NavMobile = ({ handleClick }) => {
   return (
     <StyledNavMobile>
       <Icon icon="fluent:navigation-16-filled" className="hamburguesa" />
       <Logo />
       <div className="iconos">
-        <Icon icon="tabler:search" />
+        <Icon icon="tabler:search" onClick={handleClick} className="search" />
         <Icon icon="tabler:user" />
         <Icon icon="tabler:heart" />
         <Icon icon="tabler:bookmark" />

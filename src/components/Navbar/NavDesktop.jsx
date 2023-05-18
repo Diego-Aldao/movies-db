@@ -31,7 +31,7 @@ const StyledNavDesktop = styled.nav`
   }
 `;
 
-const NavDesktop = () => {
+const NavDesktop = ({ handleClick }) => {
   return (
     <StyledNavDesktop>
       <Logo />
@@ -59,7 +59,7 @@ const NavDesktop = () => {
         />
       </div>
       <div className="iconos">
-        <Icon icon="tabler:search" />
+        <Icon icon="tabler:search" onClick={handleClick} className="search" />
         <Icon icon="tabler:user" />
         <Icon icon="tabler:heart" />
         <Icon icon="tabler:bookmark" />
