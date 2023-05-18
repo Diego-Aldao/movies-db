@@ -1,4 +1,5 @@
 import EstilosGlobales from "../styles/EstilosGlobales";
+import PaginaBusqueda from "./pages/PaginaBusqueda";
 import PaginaDetalle from "./pages/PaginaDetalle";
 import PaginaListas from "./pages/PaginaListas";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/detalle/:tipo/:id",
     element: <PaginaDetalle />,
+  },
+  {
+    path: "/busqueda/:media/:query",
+    element: <PaginaBusqueda />,
   },
 ]);
 
