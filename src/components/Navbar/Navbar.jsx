@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import NavMobile from "./NavMobile";
 import NavDesktop from "./NavDesktop";
+import BarraBusqueda from "./BarraBusqueda";
+import { useState } from "react";
 
 const StyledNav = styled.div`
   width: 100%;
@@ -21,6 +23,9 @@ const StyledNav = styled.div`
     width: 25px;
     height: 25px;
     color: var(--color-texto-principal);
+  }
+  .search {
+    color: ${({ isVisible }) => (isVisible ? "var(--color-principal)" : "")};
   }
   .iconos {
     display: flex;
@@ -46,12 +51,18 @@ const StyledNav = styled.div`
 `;
 
 const Navbar = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
   return (
-    <StyledNav>
+    <StyledNav isVisible={isVisible}>
       <div className="contenedor-nav">
-        <NavMobile />
-        <NavDesktop />
+        <NavMobile handleClick={handleClick} isVisible={isVisible} />
+        <NavDesktop handleClick={handleClick} isVisible={isVisible} />
       </div>
+      <BarraBusqueda isVisible={isVisible} />
     </StyledNav>
   );
 };
