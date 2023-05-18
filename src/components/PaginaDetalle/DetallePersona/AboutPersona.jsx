@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import styled from "styled-components";
 
 const StyledBiografia = styled.section`
@@ -22,7 +23,17 @@ const StyledBiografia = styled.section`
   }
   @media (min-width: 1024px) {
     h1 {
-      display: initial;
+      display: flex;
+      gap: 20px;
+    }
+    .interaccion {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      svg {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 `;
@@ -35,7 +46,13 @@ const AboutPersona = ({ data }) => {
     : biography;
   return (
     <StyledBiografia>
-      <h1>{name}</h1>
+      <h1>
+        {name}{" "}
+        <span className="interaccion">
+          <Icon icon="tabler:heart" />
+          <Icon icon="tabler:bookmark" />
+        </span>
+      </h1>
       <header>
         <h2>biografía</h2>
       </header>
