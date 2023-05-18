@@ -50,15 +50,18 @@ const AboutHeader = ({ dataAbout }) => {
     first_air_date?.split("-")[0] || release_date?.split("-")[0];
 
   const esPelicula = media_type === "movie";
+  const duracion = getDuracion(runtime);
   return (
     <StyledAbout>
       <h2>{title}</h2>
       <ul>
         {esPelicula ? (
           <>
-            <li>
-              <span>{getDuracion(runtime)} |</span>
-            </li>
+            {duracion && (
+              <li>
+                <span>{duracion} |</span>
+              </li>
+            )}
             <li>
               {genres?.map((genero) => (
                 <span key={genero.id} className="genero">
