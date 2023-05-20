@@ -45,8 +45,7 @@ const StyledInfo = styled.div`
 `;
 
 const InfoHeader = ({ dataInfo }) => {
-  const { poster_path, vote_average, vote_count, overview, created_by } =
-    dataInfo;
+  const { poster_path, overview, created_by } = dataInfo;
   const providers = dataInfo["watch/providers"].results;
 
   return (
@@ -55,7 +54,7 @@ const InfoHeader = ({ dataInfo }) => {
         <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="" />
       </div>
       <div className="contenedor-info">
-        <UsersInfo userInfo={{ vote_average, vote_count }} />
+        <UsersInfo userInfo={dataInfo} />
         <AboutHeader dataAbout={dataInfo} />
         <Descripcion descripcion={overview} />
         <Providers providers={providers} />
