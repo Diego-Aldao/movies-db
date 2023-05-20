@@ -1,8 +1,10 @@
 import EstilosGlobales from "../styles/EstilosGlobales";
+import { FavoritosContextProvider } from "./Context/FavoritosContext";
 import PaginaBusqueda from "./pages/PaginaBusqueda";
 import PaginaDetalle from "./pages/PaginaDetalle";
 import PaginaListas from "./pages/PaginaListas";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
+import PaginaUsuario from "./pages/PaginaUsuario";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -30,13 +32,19 @@ const router = createBrowserRouter([
     path: "/busqueda/:media/:query",
     element: <PaginaBusqueda />,
   },
+  {
+    path: "/usuario",
+    element: <PaginaUsuario />,
+  },
 ]);
 
 function App() {
   return (
     <>
-      <EstilosGlobales />
-      <RouterProvider router={router} />
+      <FavoritosContextProvider>
+        <EstilosGlobales />
+        <RouterProvider router={router} />
+      </FavoritosContextProvider>
     </>
   );
 }
