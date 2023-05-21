@@ -1,5 +1,6 @@
 import EstilosGlobales from "../styles/EstilosGlobales";
 import { FavoritosContextProvider } from "./Context/FavoritosContext";
+import { GuardadosContextProvider } from "./Context/GuardadosContext";
 import PaginaBusqueda from "./pages/PaginaBusqueda";
 import PaginaDetalle from "./pages/PaginaDetalle";
 import PaginaListas from "./pages/PaginaListas";
@@ -40,12 +41,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <GuardadosContextProvider>
       <FavoritosContextProvider>
         <EstilosGlobales />
         <RouterProvider router={router} />
       </FavoritosContextProvider>
-    </>
+    </GuardadosContextProvider>
   );
 }
 
