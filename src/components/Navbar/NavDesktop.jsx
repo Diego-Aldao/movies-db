@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "../Logo";
 import { Icon } from "@iconify/react";
-import Link from "./Link";
+import NavLink from "./NavLink";
 
 const StyledNavDesktop = styled.nav`
   display: none;
@@ -9,6 +9,9 @@ const StyledNavDesktop = styled.nav`
   height: 100%;
   align-items: center;
   gap: 30px;
+  a {
+    padding-bottom: 5px;
+  }
   .links {
     display: flex;
     gap: 20px;
@@ -19,6 +22,7 @@ const StyledNavDesktop = styled.nav`
       font-weight: 800;
     }
   }
+
   @media (min-width: 768px) {
     display: flex;
   }
@@ -31,26 +35,31 @@ const StyledNavDesktop = styled.nav`
   }
 `;
 
-const NavDesktop = ({ handleClick }) => {
+const NavDesktop = ({
+  handleClick,
+  hayFavoritos,
+  hayGuardados,
+  handleNavigation,
+}) => {
   return (
     <StyledNavDesktop>
       <Logo />
       <div className="links">
-        <Link
+        <NavLink
           navigateTo={{
             categoria: "movie",
             subCategoria: "popular",
             titulo: "peliculas",
           }}
         />
-        <Link
+        <NavLink
           navigateTo={{
             categoria: "tv",
             subCategoria: "popular",
             titulo: "programas-de-television",
           }}
         />
-        <Link
+        <NavLink
           navigateTo={{
             categoria: "person",
             subCategoria: "popular",
@@ -60,9 +69,23 @@ const NavDesktop = ({ handleClick }) => {
       </div>
       <div className="iconos">
         <Icon icon="tabler:search" onClick={handleClick} className="search" />
-        <Icon icon="tabler:user" />
-        <Icon icon="tabler:heart" />
-        <Icon icon="tabler:bookmark" />
+        <Icon icon="tabler:user" onClick={handleNavigation} />
+        {hayFavoritos ? (
+          <span className="contador">
+            <span>{hayFavoritos}</span>
+            <Icon icon="tabler:heart-filled" />
+          </span>
+        ) : (
+          <Icon icon="tabler:heart" />
+        )}
+        {hayGuardados ? (
+          <span className="contador">
+            <span>{hayGuardados}</span>
+            <Icon icon="tabler:bookmark-filled" />
+          </span>
+        ) : (
+          <Icon icon="tabler:bookmark" />
+        )}
       </div>
     </StyledNavDesktop>
   );
