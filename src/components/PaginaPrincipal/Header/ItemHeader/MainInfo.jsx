@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import getDuracion from "../../../../helpers/getDuracion";
+import useFavoritos from "../../../../hooks/useFavoritos";
+import useGuardados from "../../../../hooks/useGuardados";
+import useCurrentInteraccion from "../../../../hooks/useCurrentInteraccion";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StyledMainInfo = styled.div`
   width: 100%;
@@ -9,6 +14,8 @@ const StyledMainInfo = styled.div`
   max-width: 700px;
   margin: 0 auto;
   gap: 10px;
+  position: relative;
+  z-index: 999;
   p {
     max-height: 93px;
     overflow: hidden;
@@ -86,13 +93,15 @@ const StyledMovieData = styled.div`
     }
   }
 
-  .actions {
+  .interaccion {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 10px;
     svg {
       width: 15px;
       height: 15px;
+      color: var(--color-principal);
     }
   }
 
@@ -108,10 +117,45 @@ const StyledMovieData = styled.div`
       grid-column: 1 / 2;
       grid-row: 1 / 2;
     }
+    .interaccion {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 `;
 
 const MainInfo = ({ mainInfo }) => {
+  const { favoritos, guardarFavorito } = useFavoritos();
+  const { guardados, añadirGuardado } = useGuardados();
+  const { liked, saved, getCurrentInteraccion } = useCurrentInteraccion();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getCurrentInteraccion(mainInfo);
+  }, [favoritos, guardados]);
+
+  const handleClick = (tipo) => {
+    const objetoGuardado = {
+      imagen: mainInfo.poster_path || mainInfo.backdrop_path,
+      titulo: mainInfo.title || mainInfo.name,
+      descripcion: mainInfo.overview,
+      subtitulo: mainInfo.first_air_date || mainInfo.release_date,
+      id: mainInfo.id,
+      media: "movie",
+    };
+    if (tipo === "favoritos") {
+      guardarFavorito(objetoGuardado);
+    } else if (tipo === "guardados") {
+      añadirGuardado(objetoGuardado);
+    }
+  };
+
+  const handleNavigation = () => {
+    navigate(`/detalle/movie/${mainInfo.id}`);
+  };
+
   return (
     <StyledMainInfo data-swiper-parallax="-55%">
       <StyledMovieData>
@@ -134,14 +178,41 @@ const MainInfo = ({ mainInfo }) => {
           <span>{mainInfo?.vote_average?.toFixed(1)}</span>
           <span>| {mainInfo?.vote_count}</span>
         </div>
-        <div className="actions">
-          <Icon icon="ic:round-favorite-border" />
-          <Icon icon="ic:outline-bookmark-added" display={"none"} />
-          <Icon icon="ic:outline-share" />
-          <Icon icon="ic:outline-bookmark-add" />
+        <div className="interaccion">
+          {liked ? (
+            <Icon
+              icon="tabler:heart-filled"
+              onClick={() => {
+                handleClick("favoritos");
+              }}
+            />
+          ) : (
+            <Icon
+              icon="tabler:heart"
+              onClick={() => {
+                handleClick("favoritos");
+              }}
+            />
+          )}
+
+          {saved ? (
+            <Icon
+              icon="tabler:bookmark-filled"
+              onClick={() => {
+                handleClick("guardados");
+              }}
+            />
+          ) : (
+            <Icon
+              icon="tabler:bookmark-plus"
+              onClick={() => {
+                handleClick("guardados");
+              }}
+            />
+          )}
         </div>
       </StyledMovieData>
-      <p>
+      <p onClick={handleNavigation}>
         {mainInfo?.overview} <span>ver detalle</span>
       </p>
     </StyledMainInfo>
