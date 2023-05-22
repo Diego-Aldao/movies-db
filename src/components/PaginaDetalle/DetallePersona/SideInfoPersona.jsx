@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import External from "../External";
 import { Icon } from "@iconify/react";
+import { departamentos } from "../../../Utils/Traducciones";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -118,6 +119,7 @@ const SideInfoPersona = ({ data }) => {
     homepage,
     also_known_as,
   } = data;
+  const departamento = departamentos[known_for_department];
   const genero = gender === 1 ? "femenino" : "masculino";
   return (
     <StyledSection>
@@ -141,7 +143,7 @@ const SideInfoPersona = ({ data }) => {
         <ul className="lista-info-personal">
           <li>
             <p>conocido por:</p>
-            <p>{known_for_department}</p>
+            <p>{departamento}</p>
           </li>
           <li>
             <p>creditos conocidos</p>
