@@ -3,6 +3,10 @@ import NavMobile from "./NavMobile";
 import NavDesktop from "./NavDesktop";
 import BarraBusqueda from "./BarraBusqueda";
 import { useState } from "react";
+import useGuardados from "../../hooks/useGuardados";
+import useFavoritos from "../../hooks/useFavoritos";
+import { useNavigate } from "react-router-dom";
+import ModalMobile from "./ModalMobile";
 
 const StyledNav = styled.div`
   width: 100%;
@@ -32,8 +36,41 @@ const StyledNav = styled.div`
     align-items: center;
     margin-left: auto;
     gap: 10px;
+    svg {
+      cursor: pointer;
+    }
+    svg:hover {
+      color: var(--color-principal);
+    }
+  }
+
+  .contador {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    span {
+      position: absolute;
+      top: -10px;
+      font-weight: 800;
+      right: -5px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+
+      color: var(--color-principal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg {
+      color: var(--color-principal);
+    }
   }
   @media (min-width: 768px) {
+    .contenedor-nav {
+      padding-inline: 24px;
+    }
     .iconos {
       display: flex;
       gap: 20px;
@@ -52,17 +89,47 @@ const StyledNav = styled.div`
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  const { favoritos } = useFavoritos();
+  const { guardados } = useGuardados();
+
+  const hayFavoritos = favoritos.length;
+  const hayGuardados = guardados.length;
 
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
+
+  const handleNavigation = () => {
+    navigate(`/usuario`);
+  };
+
   return (
     <StyledNav isVisible={isVisible}>
       <div className="contenedor-nav">
-        <NavMobile handleClick={handleClick} isVisible={isVisible} />
-        <NavDesktop handleClick={handleClick} isVisible={isVisible} />
+        <NavMobile
+          handleClick={handleClick}
+          isVisible={isVisible}
+          hayFavoritos={hayFavoritos}
+          hayGuardados={hayGuardados}
+          handleNavigation={handleNavigation}
+          setModalIsVisible={setModalIsVisible}
+        />
+        <NavDesktop
+          handleClick={handleClick}
+          isVisible={isVisible}
+          hayFavoritos={hayFavoritos}
+          hayGuardados={hayGuardados}
+          handleNavigation={handleNavigation}
+        />
       </div>
       <BarraBusqueda isVisible={isVisible} />
+      <ModalMobile
+        modalIsVisible={modalIsVisible}
+        setModalIsVisible={setModalIsVisible}
+      />
     </StyledNav>
   );
 };
