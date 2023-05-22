@@ -18,7 +18,7 @@ export const StyledSection = styled.section`
   max-width: 1600px;
   overflow: hidden;
   padding-inline: 10px;
-  margin: 100px auto 0px;
+  margin: 50px auto 0px;
   ${({ banner }) =>
     banner &&
     css`
@@ -74,6 +74,9 @@ const StyledSwiper = styled(Swiper)`
   position: relative;
   overflow: visible;
   padding-bottom: 40px;
+  .swiper-slide {
+    cursor: grab;
+  }
   .swiper-scroll {
     cursor: pointer;
     background: var(--bg-secundario);

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const StyledSection = styled(SectionInitialPage)`
   padding: 0px;
+  margin-top: 0px;
+  max-width: 100%;
   .swiper {
     height: auto !important; //la unica manera de sobreescribir esta propiedad del swiper
   }

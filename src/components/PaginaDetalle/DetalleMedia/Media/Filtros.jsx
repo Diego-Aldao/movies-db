@@ -6,6 +6,7 @@ const StyledFiltros = styled.ul`
   li {
     color: var(--color-texto-principal);
     text-transform: capitalize;
+    cursor: pointer;
   }
   span {
     text-transform: capitalize;

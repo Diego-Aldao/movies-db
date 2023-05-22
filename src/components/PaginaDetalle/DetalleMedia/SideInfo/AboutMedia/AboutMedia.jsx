@@ -5,7 +5,7 @@ import InfoTv from "./InfoTv";
 export const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   li {
     display: flex;
     gap: 5px;

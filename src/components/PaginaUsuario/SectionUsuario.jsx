@@ -13,6 +13,18 @@ const StyledSection = styled.section`
   }
 `;
 
+const StyledGridUsuario = styled(StyledGrid)`
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  @media (min-width: 850px) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  @media (min-width: 1050px) {
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  }
+`;
+
 const SeccionUsuario = ({
   interaccion,
   guardarFavorito,
@@ -24,7 +36,7 @@ const SeccionUsuario = ({
       <header>
         <h2>{titulo}</h2>
       </header>
-      <StyledGrid>
+      <StyledGridUsuario>
         {interaccion?.map((item) => (
           <ItemUsuario
             item={item}
@@ -33,7 +45,7 @@ const SeccionUsuario = ({
             key={item.id}
           />
         ))}
-      </StyledGrid>
+      </StyledGridUsuario>
     </StyledSection>
   );
 };

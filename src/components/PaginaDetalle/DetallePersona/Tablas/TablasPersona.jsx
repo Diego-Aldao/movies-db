@@ -28,9 +28,13 @@ const StyledSection = styled.section`
     display: inline;
     font-size: 16px;
   }
-  p {
+  .titulo {
     color: var(--color-texto-principal);
     font-weight: 700;
+    cursor: pointer;
+  }
+  .titulo:hover {
+    color: var(--color-principal);
   }
   span {
     font-weight: 300;

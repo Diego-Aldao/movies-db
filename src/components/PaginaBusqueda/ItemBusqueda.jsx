@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { departamentos } from "../../Utils/Traducciones";
 import { useNavigate } from "react-router-dom";
 
-const StyledItem = styled.div`
+export const StyledItem = styled.div`
   width: 100%;
   background: var(--bg-secundario);
   display: flex;

@@ -8,7 +8,6 @@ import useDetalle from "../../../../hooks/useDetalle";
 const StyledHeader = styled.div`
   position: relative;
   overflow: hidden;
-  z-index: 2;
   height: 75vh;
   min-height: 750px;
   display: flex;
@@ -41,6 +40,14 @@ const StyledHeader = styled.div`
     img {
       object-position: 50% 0%;
     }
+  }
+  .navigate {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    bottom: 0px;
+    z-index: 1;
   }
 `;
 
@@ -99,7 +106,8 @@ const ItemHeader = ({ movieId }) => {
   return (
     <>
       {detalle && (
-        <StyledHeader onClick={handleClick}>
+        <StyledHeader>
+          <div className="navigate" onClick={handleClick}></div>
           <div
             className="banner"
             data-swiper-parallax="75%"

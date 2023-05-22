@@ -1,7 +1,7 @@
 const Imagenes = ({ data }) => {
   const { file_path } = data;
   return (
-    <div className="contenedor-img">
+    <div>
       <picture>
         <source
           srcSet={`https://image.tmdb.org/t/p/w200${file_path}`}
