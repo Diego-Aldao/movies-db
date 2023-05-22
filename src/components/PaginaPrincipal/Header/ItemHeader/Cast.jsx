@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 const StyledCast = styled.div`
   width: 100%;
@@ -8,7 +9,6 @@ const StyledCast = styled.div`
     width: 100%;
     text-transform: capitalize;
     font-size: 20px;
-    margin-bottom: 5px;
     height: 30px;
   }
   .cast-item {
@@ -36,11 +36,22 @@ const StyledCast = styled.div`
 `;
 
 const Cast = ({ cast }) => {
+  const navigate = useNavigate();
+  const handleNavigate = (id) => {
+    navigate(`/detalle/person/${id}`);
+  };
+
   return (
     <StyledCast data-swiper-parallax="-55%">
       <h2>cast</h2>
       {cast?.map((actor) => (
-        <div className="cast-item" key={actor.id}>
+        <div
+          className="cast-item"
+          key={actor.id}
+          onClick={() => {
+            handleNavigate(actor.id);
+          }}
+        >
           <div className="cast-item-img">
             <img
               src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
