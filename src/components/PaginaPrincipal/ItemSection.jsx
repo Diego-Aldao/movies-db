@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import getPorcentaje from "../../helpers/getPorcentaje";
 import { useNavigate } from "react-router-dom";
+import { Circle } from "rc-progress";
+import { departamentos } from "../../Utils/Traducciones.js";
+import FailedImage from "../FailedImage";
 
 const StyledItem = styled.div`
   display: flex;
@@ -8,9 +11,30 @@ const StyledItem = styled.div`
   gap: 10px;
   z-index: 2;
   position: relative;
-  height: 100%;
+  height: 330px;
   background: var(--bg-secundario);
-
+  .contenedor-img {
+    position: relative;
+    height: 70%;
+    .porcentaje {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      bottom: -10px;
+      left: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secundario);
+      color: var(--color-texto-principal);
+      border-radius: 50%;
+      text-transform: uppercase;
+      font-size: 12px;
+      span {
+        position: absolute;
+      }
+    }
+  }
   p {
     font-size: 14px;
     font-weight: 600;
@@ -26,29 +50,16 @@ const StyledItem = styled.div`
     padding: 15px;
     display: flex;
     flex-direction: column;
+    height: 30%;
+    gap: 5px;
   }
   span {
     font-size: 14px;
   }
-  .contenedor-img {
-    position: relative;
-    span {
-      position: absolute;
-      bottom: -10px;
-      left: 5px;
-      background: var(--bg-secundario);
-      color: var(--color-texto-principal);
-      width: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 35px;
-      border-radius: 50%;
-      border: 2px solid var(--color-texto-principal);
-      text-transform: uppercase;
-      font-size: 12px;
-    }
+  .fecha {
+    font-size: 12px;
   }
+
   @media (min-width: 768px) {
     .info {
       height: 96px;
@@ -64,7 +75,6 @@ const ItemSection = ({ itemData, mouseOver }) => {
 
   const {
     known_for_department,
-    gender,
     media_type,
     profile_path,
     poster_path,
@@ -82,45 +92,59 @@ const ItemSection = ({ itemData, mouseOver }) => {
 
   const not_actor = media_type !== "person";
 
-  const path_imagen = media_type == "person" ? profile_path : poster_path;
+  const path_imagen = profile_path || poster_path;
 
-  const titulo_item = name ? name : title;
+  const titulo_item = name || title;
 
-  const departamentos = {
-    Acting: "Actor",
-    Actors: "Actores",
-    Art: "Arte",
-    Camera: "Cámara",
-    "Costume & Make-Up": "Vestuario y maquillaje",
-    Creator: "Creador",
-    Crew: "Equipo",
-    Directing: "Dirección",
-    Editing: "Edición",
-    Lighting: "Iluminación",
-    Production: "Producción",
-    Sound: "Sonido",
-    "Visual Effects": "Efectos visuales",
-    Writing: "Guion",
-  };
   let tipoPersona = departamentos[known_for_department];
 
-  if (tipoPersona === "Actor" && gender == 1) {
-    tipoPersona = "Actriz";
-  }
+  const porcentaje = getPorcentaje(vote_average);
+
+  const fecha = release_date || first_air_date;
+
+  const fechaFormateada = new Date(fecha).toLocaleDateString("es-AR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const colorPorcentaje =
+    porcentaje === "-"
+      ? "#a3a3a3"
+      : porcentaje >= 75
+      ? "#21d07a"
+      : porcentaje >= 45
+      ? "#d2d531"
+      : "#db2360";
 
   return (
     <StyledItem onMouseOver={mouseOver} onClick={handleClick}>
       <div className="contenedor-img">
-        <img
-          src={`${IMAGENURL}${path_imagen}`}
-          alt="poster de pelicula o celebridad"
-        />
-        {not_actor && <span>{getPorcentaje(vote_average)}</span>}
+        {path_imagen ? (
+          <img
+            src={`${IMAGENURL}${path_imagen}`}
+            alt="poster de pelicula o celebridad"
+          />
+        ) : (
+          <FailedImage />
+        )}
+        {not_actor && (
+          <div className="porcentaje">
+            <span>{porcentaje}</span>
+            <Circle
+              percent={porcentaje}
+              strokeWidth={6}
+              strokeColor={colorPorcentaje}
+              trailWidth={3}
+              trailColor={"#dfdfdf"}
+            />
+          </div>
+        )}
       </div>
       <div className="info">
         <p>{titulo_item}</p>
         {not_actor ? (
-          <span>{release_date ? release_date : first_air_date}</span>
+          <span className="fecha">{fechaFormateada}</span>
         ) : (
           <span>{tipoPersona}</span>
         )}
