@@ -6,6 +6,7 @@ import MainListas from "../components/PaginaListas/MainListas";
 import useInitialData from "../hooks/useInitialData";
 import useFiltros from "../hooks/useFiltros";
 import ContenedorLista from "../components/PaginaListas/ContenedorLista";
+import ScrollTop from "../components/ScrollTop";
 
 const PaginaListas = () => {
   const dataInicial = JSON.parse(localStorage.getItem("PaginaInicial"));
@@ -42,6 +43,7 @@ const PaginaListas = () => {
 
   return (
     <LayoutPrincipal>
+      <ScrollTop />
       <MainListas>
         <Header>
           <h2>{`${newTitulo} ${subCategoria}es`}</h2>

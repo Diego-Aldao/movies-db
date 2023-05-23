@@ -4,10 +4,12 @@ import Estrenos from "../components/PaginaPrincipal/Estrenos/Estrenos";
 import TopMovies from "../components/PaginaPrincipal/TopMovies/TopMovies";
 import TopSeries from "../components/PaginaPrincipal/TopSeries/TopSeries";
 import LayoutPrincipal from "../Layout/LayoutPrincipal";
+import ScrollTop from "../components/ScrollTop";
 
 const PaginaPrincipal = () => {
   return (
     <LayoutPrincipal>
+      <ScrollTop />
       <Header />
       <Tendencias />
       <Estrenos />

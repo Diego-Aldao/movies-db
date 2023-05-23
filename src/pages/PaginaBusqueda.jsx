@@ -7,6 +7,7 @@ import { useState } from "react";
 import Main from "../components/PaginaBusqueda/Main";
 import Filtros from "../components/PaginaBusqueda/Filtros";
 import Grid from "../components/PaginaBusqueda/Grid";
+import ScrollTop from "../components/ScrollTop";
 
 const PaginaBusqueda = () => {
   const params = useParams();
@@ -34,6 +35,7 @@ const PaginaBusqueda = () => {
 
   return (
     <LayoutPrincipal>
+      <ScrollTop />
       <Main params={params}>
         {currentData && (
           <>

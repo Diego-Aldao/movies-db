@@ -15,6 +15,7 @@ import AboutPersona from "../components/PaginaDetalle/DetallePersona/AboutPerson
 import ParticipacionesPersona from "../components/PaginaDetalle/DetallePersona/ParticipacionesPersona";
 import TablasPersona from "../components/PaginaDetalle/DetallePersona/Tablas/TablasPersona";
 import { useState, useEffect } from "react";
+import ScrollTop from "../components/ScrollTop";
 
 const PaginaDetalle = () => {
   const params = useParams();
@@ -44,6 +45,7 @@ const PaginaDetalle = () => {
 
   return (
     <LayoutPrincipal>
+      <ScrollTop />
       {dataMedia && tipo !== "person" ? (
         <>
           <Header data={{ ...dataMedia, media_type: tipo }} />
