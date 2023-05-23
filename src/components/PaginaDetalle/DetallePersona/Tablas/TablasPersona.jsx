@@ -18,6 +18,9 @@ const StyledSection = styled.section`
     border-bottom: 2px solid var(--bg-secundario);
     text-align: center;
   }
+  tr:hover {
+    background: var(--bg-secundario);
+  }
   .separador {
     padding-inline: 10px;
     color: var(--color-texto-principal);
