@@ -76,7 +76,8 @@ const ContenedorFiltros = ({
 
   const handleClick = () => {
     const newFiltros = { ...filtros, pagina: 1, categoria: categoria };
-    getListaFiltrada(newFiltros);
+    const url = `https://api.themoviedb.org/3/discover/${categoria}?include_adult=false&include_video=false&language=es-ES&page=${newFiltros.pagina}${filtros.sort}${filtros.generos}`;
+    getListaFiltrada(url);
   };
 
   return (

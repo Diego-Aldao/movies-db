@@ -52,7 +52,13 @@ const ContenedorLista = ({
 
   useEffect(() => {
     if (pagina === 1) return;
-    getListaFiltrada(filtros);
+    if (data_type !== "person") {
+      const url = `https://api.themoviedb.org/3/discover/${categoria}?include_adult=false&include_video=false&language=es-ES&page=${pagina}${filtros.sort}${filtros.generos}`;
+      getListaFiltrada(url);
+    } else {
+      const url = `https://api.themoviedb.org/3/person/popular?language=es-ES&page=${pagina}`;
+      getListaFiltrada(url);
+    }
   }, [filtros]);
 
   useEffect(() => {
@@ -63,7 +69,12 @@ const ContenedorLista = ({
 
   const handleClick = () => {
     const newPagina = pagina + 1;
-    const newFiltros = { ...filtros, pagina: newPagina, categoria: categoria };
+
+    const newFiltros = {
+      ...filtros,
+      pagina: newPagina,
+      categoria: categoria,
+    };
     setFiltros(newFiltros);
   };
 
@@ -76,14 +87,10 @@ const ContenedorLista = ({
             return <ItemLista key={newItem.id} info={newItem} />;
           })}
       </StyledContenedor>
-      {data_type !== "person" ? (
-        <StyledButton data_type={data_type} onClick={handleClick}>
-          <span>mostrar mas</span>
-        </StyledButton>
-      ) : (
-        <></>
-        //agregar un boton con la funcionalidad que necesita la pagina celebridades
-      )}
+
+      <StyledButton data_type={data_type} onClick={handleClick}>
+        <span>mostrar mas</span>
+      </StyledButton>
     </>
   );
 };
