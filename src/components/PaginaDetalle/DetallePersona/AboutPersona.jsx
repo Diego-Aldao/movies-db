@@ -1,10 +1,8 @@
-import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import useGuardados from "../../../hooks/useGuardados";
-import useFavoritos from "../../../hooks/useFavoritos";
 import { departamentos } from "../../../Utils/Traducciones";
-import useCurrentInteraccion from "../../../hooks/useCurrentInteraccion";
+
+import Interaccion from "../../Interaccion";
 
 const StyledBiografia = styled.section`
   width: 100%;
@@ -33,6 +31,7 @@ const StyledBiografia = styled.section`
   }
   svg {
     color: var(--color-principal);
+    cursor: pointer;
   }
 
   .ver-mas {
@@ -53,15 +52,6 @@ const StyledBiografia = styled.section`
       display: flex;
       gap: 20px;
     }
-    .interaccion {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      svg {
-        width: 25px;
-        height: 25px;
-      }
-    }
   }
 `;
 
@@ -72,11 +62,17 @@ const AboutPersona = ({ data }) => {
     ? "ups, parece que aun no hay una biografia en español de esta celebridad"
     : biography;
 
+  const objetoInteraccion = {
+    imagen: data.profile_path,
+    titulo: name,
+    descripcion: biografia,
+    subtitulo: departamentos[data.known_for_department],
+    id: data.id,
+    media: "person",
+  };
+
   const biografiaLarga = biografia.length >= 890;
 
-  const { favoritos, guardarFavorito } = useFavoritos();
-  const { guardados, añadirGuardado } = useGuardados();
-  const { liked, saved, getCurrentInteraccion } = useCurrentInteraccion();
   const [verMas, setVerMas] = useState(biografiaLarga);
 
   const initialStyles = {
@@ -84,67 +80,16 @@ const AboutPersona = ({ data }) => {
   };
   const [styles, setStyles] = useState(initialStyles);
 
-  useEffect(() => {
-    getCurrentInteraccion(data);
-  }, [favoritos, guardados]);
-
   const handleClick = () => {
     setStyles({ ...styles, WebkitLineClamp: "initial" });
     setVerMas(false);
   };
 
-  const handleAñadir = (tipo) => {
-    const objetoGuardado = {
-      imagen: data.profile_path,
-      titulo: data.name,
-      descripcion: biografia,
-      subtitulo: departamentos[data.known_for_department],
-      id: data.id,
-      media: "person",
-    };
-    if (tipo === "favoritos") {
-      guardarFavorito(objetoGuardado);
-    } else if (tipo === "guardados") {
-      añadirGuardado(objetoGuardado);
-    }
-  };
-
   return (
     <StyledBiografia>
       <h1>
-        {name}{" "}
-        <span className="interaccion">
-          {liked ? (
-            <Icon
-              icon="tabler:heart-filled"
-              onClick={() => {
-                handleAñadir("favoritos");
-              }}
-            />
-          ) : (
-            <Icon
-              icon="tabler:heart"
-              onClick={() => {
-                handleAñadir("favoritos");
-              }}
-            />
-          )}
-          {saved ? (
-            <Icon
-              icon="tabler:bookmark-filled"
-              onClick={() => {
-                handleAñadir("guardados");
-              }}
-            />
-          ) : (
-            <Icon
-              icon="tabler:bookmark"
-              onClick={() => {
-                handleAñadir("guardados");
-              }}
-            />
-          )}
-        </span>
+        {name}
+        <Interaccion objetoInfo={objetoInteraccion} />
       </h1>
       <header>
         <h2>biografía</h2>

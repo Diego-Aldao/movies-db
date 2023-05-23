@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import getDuracion from "../../../../helpers/getDuracion";
-import useFavoritos from "../../../../hooks/useFavoritos";
-import useGuardados from "../../../../hooks/useGuardados";
-import useCurrentInteraccion from "../../../../hooks/useCurrentInteraccion";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Interaccion from "../../../Interaccion";
 
 const StyledMainInfo = styled.div`
   width: 100%;
@@ -127,29 +124,16 @@ const StyledMovieData = styled.div`
 `;
 
 const MainInfo = ({ mainInfo }) => {
-  const { favoritos, guardarFavorito } = useFavoritos();
-  const { guardados, añadirGuardado } = useGuardados();
-  const { liked, saved, getCurrentInteraccion } = useCurrentInteraccion();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getCurrentInteraccion(mainInfo);
-  }, [favoritos, guardados]);
-
-  const handleClick = (tipo) => {
-    const objetoGuardado = {
-      imagen: mainInfo.poster_path || mainInfo.backdrop_path,
-      titulo: mainInfo.title || mainInfo.name,
-      descripcion: mainInfo.overview,
-      subtitulo: mainInfo.first_air_date || mainInfo.release_date,
-      id: mainInfo.id,
-      media: "movie",
-    };
-    if (tipo === "favoritos") {
-      guardarFavorito(objetoGuardado);
-    } else if (tipo === "guardados") {
-      añadirGuardado(objetoGuardado);
-    }
+  //objeto para guardar en favoritos o guardados
+  const objetoInteraccion = {
+    imagen: mainInfo.poster_path || mainInfo.backdrop_path,
+    titulo: mainInfo.title || mainInfo.name,
+    descripcion: mainInfo.overview,
+    subtitulo: mainInfo.first_air_date || mainInfo.release_date,
+    id: mainInfo.id,
+    media: "movie",
   };
 
   const handleNavigation = () => {
@@ -178,39 +162,7 @@ const MainInfo = ({ mainInfo }) => {
           <span>{mainInfo?.vote_average?.toFixed(1)}</span>
           <span>| {mainInfo?.vote_count}</span>
         </div>
-        <div className="interaccion">
-          {liked ? (
-            <Icon
-              icon="tabler:heart-filled"
-              onClick={() => {
-                handleClick("favoritos");
-              }}
-            />
-          ) : (
-            <Icon
-              icon="tabler:heart"
-              onClick={() => {
-                handleClick("favoritos");
-              }}
-            />
-          )}
-
-          {saved ? (
-            <Icon
-              icon="tabler:bookmark-filled"
-              onClick={() => {
-                handleClick("guardados");
-              }}
-            />
-          ) : (
-            <Icon
-              icon="tabler:bookmark-plus"
-              onClick={() => {
-                handleClick("guardados");
-              }}
-            />
-          )}
-        </div>
+        <Interaccion objetoInfo={objetoInteraccion} />
       </StyledMovieData>
       <p onClick={handleNavigation}>
         {mainInfo?.overview} <span>ver detalle</span>
