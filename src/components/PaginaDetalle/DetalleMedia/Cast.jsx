@@ -2,6 +2,7 @@ import SectionInitialPage from "../../SectionPage";
 import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import FailedImage from "../../FailedImage";
 
 const StyledSection = styled(SectionInitialPage)`
   margin-top: 20px;
@@ -83,10 +84,14 @@ const Cast = ({ cast }) => {
             >
               <ItemCast>
                 <div className="imagen-persona">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${persona.profile_path}`}
-                    alt=""
-                  />
+                  {persona.profile_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${persona.profile_path}`}
+                      alt=""
+                    />
+                  ) : (
+                    <FailedImage />
+                  )}
                 </div>
                 <div className="info-persona">
                   <p className="nombre">{persona.name}</p>

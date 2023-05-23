@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { departamentos } from "../../Utils/Traducciones";
 import { useNavigate } from "react-router-dom";
+import FailedImage from "../FailedImage";
 
 export const StyledItem = styled.div`
   width: 100%;
@@ -78,7 +79,7 @@ const ItemBusqueda = ({ resultado, propsMedia }) => {
   return (
     <StyledItem key={resultado.id} onClick={handleClick}>
       <div className="imagen-item">
-        {imagen && <img src={`${URL}${imagen}`} alt="" />}
+        {imagen ? <img src={`${URL}${imagen}`} alt="" /> : <FailedImage />}
       </div>
       <div className="info-item">
         <h3>{titulo}</h3>

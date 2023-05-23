@@ -3,6 +3,7 @@ import { SwiperSlide } from "swiper/react";
 import styled from "styled-components";
 import getPorcentaje from "../../../helpers/getPorcentaje";
 import { useNavigate } from "react-router-dom";
+import FailedImage from "../../FailedImage";
 
 const StyledSection = styled(SectionInitialPage)`
   padding: 0px;
@@ -14,6 +15,7 @@ const StyledSection = styled(SectionInitialPage)`
   .imagen-similares {
     border-radius: 10px;
     overflow: hidden;
+    height: 120px;
   }
   .info-similares {
     display: flex;
@@ -43,7 +45,7 @@ const breakpoints = {
   768: {
     slidesPerView: 3.5,
   },
-  1024: {
+  1240: {
     slidesPerView: 3.5,
   },
 };
@@ -78,10 +80,14 @@ const Similares = ({ dataSimilares }) => {
                 }}
               >
                 <div className="imagen-similares">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
-                    alt=""
-                  />
+                  {backdrop_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
+                      alt=""
+                    />
+                  ) : (
+                    <FailedImage />
+                  )}
                 </div>
                 <div className="info-similares">
                   <p>{title ? title : name}</p>

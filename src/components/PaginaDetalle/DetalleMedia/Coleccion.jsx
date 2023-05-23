@@ -1,10 +1,19 @@
 import { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import useDetalle from "../../../hooks/useDetalle";
+import imgPlaceholder from "../../../assets/image-placeholder.svg";
 
 const StyledSection = styled.section`
   width: 100%;
-  background: ${({ bg }) => `url(${bg})`} no-repeat center / cover;
+  ${({ bg }) =>
+    bg
+      ? css`
+          background: ${({ bg }) => `url(${bg})`} no-repeat center / cover;
+        `
+      : css`
+          background: ${({ failedImage }) => `url(${failedImage})`} no-repeat
+            center / 50%;
+        `}
   position: relative;
   margin-top: 50px;
   display: flex;
@@ -83,10 +92,12 @@ const Coleccion = ({ coleccion }) => {
     getDetalle(url);
   }, []);
 
+  const backgroundImage = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
+
   return (
     <>
       {detalle && (
-        <StyledSection bg={`https://image.tmdb.org/t/p/w500${backdrop_path}`}>
+        <StyledSection bg={backgroundImage} failedImage={imgPlaceholder}>
           <div className="info-coleccion">
             <h2>{name}</h2>
             <p className="descripcion">{detalle.overview}</p>

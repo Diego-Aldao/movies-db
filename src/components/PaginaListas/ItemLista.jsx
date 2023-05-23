@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import FailedImage from "../FailedImage";
+
 const StyledItem = styled.div`
   display: flex;
   height: 45vw;
   background: var(--bg-secundario);
   border-radius: 5px;
   overflow: hidden;
-
   .contenedor-img {
     width: 30%;
     position: relative;
@@ -123,7 +124,11 @@ const ItemLista = ({ info }) => {
   return (
     <StyledItem onClick={handleClick}>
       <div className="contenedor-img">
-        <img src={`https://image.tmdb.org/t/p/w300${path_imagen}`} alt="" />
+        {path_imagen ? (
+          <img src={`https://image.tmdb.org/t/p/w300${path_imagen}`} alt="" />
+        ) : (
+          <FailedImage />
+        )}
         {vote_average && <span>{vote_average}</span>}
       </div>
       <div className="info">
