@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import External from "../External";
-import { Icon } from "@iconify/react";
 import { departamentos } from "../../../Utils/Traducciones";
+import Interaccion from "../../Interaccion";
+import FailedImage from "../../FailedImage";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -44,7 +45,6 @@ const StyledSection = styled.section`
   }
   @media (min-width: 1024px) {
     width: 300px;
-    .interaccion,
     h1 {
       display: none;
     }
@@ -54,6 +54,12 @@ const StyledSection = styled.section`
     ul {
       justify-content: start;
     }
+  }
+`;
+
+const StyledInteraccion = styled(Interaccion)`
+  @media (min-width: 1024px) {
+    display: none;
   }
 `;
 
@@ -118,25 +124,47 @@ const SideInfoPersona = ({ data }) => {
     known_for_department,
     homepage,
     also_known_as,
+    biography,
+    id,
   } = data;
+
   const departamento = departamentos[known_for_department];
   const genero = gender === 1 ? "femenino" : "masculino";
+
+  const biografia = !biography
+    ? "ups, parece que aun no hay una biografia en español de esta celebridad"
+    : biography;
+
+  const objetoInteraccion = {
+    imagen: profile_path,
+    titulo: name,
+    descripcion: biografia,
+    subtitulo: departamentos[known_for_department],
+    id: id,
+    media: "person",
+  };
+
   return (
     <StyledSection>
       <div className="imagen-persona">
-        <picture>
-          <source
-            srcSet={`https://image.tmdb.org/t/p/w200${profile_path}`}
-            media="(max-width: 768px)"
-          />
-          <img src={`https://image.tmdb.org/t/p/w500${profile_path}`} alt="" />
-        </picture>
+        {profile_path ? (
+          <picture>
+            <source
+              srcSet={`https://image.tmdb.org/t/p/w200${profile_path}`}
+              media="(max-width: 768px)"
+            />
+            <img
+              src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+              alt=""
+            />
+          </picture>
+        ) : (
+          <FailedImage />
+        )}
       </div>
       <h1>{name}</h1>
-      <div className="interaccion">
-        <Icon icon="tabler:heart" />
-        <Icon icon="tabler:bookmark" />
-      </div>
+
+      <StyledInteraccion objetoInfo={objetoInteraccion} />
       <External externalData={external_ids} homepage={homepage} />
       <InfoPersonal>
         <h2>informacion personal</h2>
