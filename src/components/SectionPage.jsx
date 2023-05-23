@@ -74,6 +74,9 @@ const StyledSwiper = styled(Swiper)`
   position: relative;
   overflow: visible;
   padding-bottom: 40px;
+  img {
+    object-position: 50% 0%;
+  }
   .swiper-slide {
     cursor: grab;
   }
@@ -138,14 +141,17 @@ const SectionPage = ({
         spaceBetween={currentSpace ? currentSpace : 15}
         breakpoints={{
           480: {
-            slidesPerView: 3.85,
+            slidesPerView: 2.8,
           },
-          768: {
-            slidesPerView: 4.9,
+          700: {
+            slidesPerView: 3.8,
             spaceBetween: 25,
           },
           1024: {
-            slidesPerView: 6.9,
+            slidesPerView: 5.8,
+          },
+          1240: {
+            slidesPerView: 6.8,
           },
           ...currentBreakpoints,
         }}

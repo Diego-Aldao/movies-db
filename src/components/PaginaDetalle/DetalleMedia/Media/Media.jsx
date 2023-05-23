@@ -80,6 +80,10 @@ const Media = ({ mediaType, idMedia }) => {
       slidesPerView: 3.1,
       spaceBetween: 15,
     },
+    1240: {
+      slidesPerView: 3.1,
+      spaceBetween: 15,
+    },
   };
 
   return (

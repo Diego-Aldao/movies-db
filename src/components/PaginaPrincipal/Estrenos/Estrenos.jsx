@@ -17,6 +17,9 @@ const breakpoints = {
   1024: {
     slidesPerView: 5,
   },
+  1240: {
+    slidesPerView: 5.8,
+  },
 };
 
 const Estrenos = () => {

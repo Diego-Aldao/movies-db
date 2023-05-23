@@ -27,6 +27,9 @@ const breakpoints = {
   1024: {
     slidesPerView: 6.3,
   },
+  1240: {
+    slidesPerView: 6.3,
+  },
 };
 
 const ParticipacionesPersona = ({ data }) => {
