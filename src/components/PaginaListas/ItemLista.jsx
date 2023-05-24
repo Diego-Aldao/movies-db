@@ -125,7 +125,10 @@ const ItemLista = ({ info }) => {
     <StyledItem onClick={handleClick}>
       <div className="contenedor-img">
         {path_imagen ? (
-          <img src={`https://image.tmdb.org/t/p/w300${path_imagen}`} alt="" />
+          <img
+            src={`https://image.tmdb.org/t/p/w300${path_imagen}`}
+            alt="imagen de una pelicula, serie o celebridad"
+          />
         ) : (
           <FailedImage />
         )}

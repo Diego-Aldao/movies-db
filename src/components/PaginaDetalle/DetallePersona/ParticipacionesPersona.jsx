@@ -69,7 +69,10 @@ const ParticipacionesPersona = ({ data }) => {
           }}
         >
           <div>
-            <img src={`${URL}${participacion.poster_path}`} alt="" />
+            <img
+              src={`${URL}${participacion.poster_path}`}
+              alt="imagen sobre una pelicula o serie relacionada con la celebridad de esta pagina"
+            />
           </div>
         </SwiperSlide>
       ))}

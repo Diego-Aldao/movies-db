@@ -55,7 +55,7 @@ const Cast = ({ cast }) => {
           <div className="cast-item-img">
             <img
               src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-              alt=""
+              alt="imagen de una celebridad"
             />
           </div>
           <p className="cast-item-nombre">{actor.name}</p>

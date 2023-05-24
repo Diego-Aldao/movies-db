@@ -55,12 +55,12 @@ const Footer = () => {
     <StyledFooter>
       <div className="brand">
         <Logo />
-        <p>Peliculas, series y actores</p>
+        <p>Peliculas, series y celebridades</p>
       </div>
       <div>
-        <h2>lo basico</h2>
+        <h2>lo básico</h2>
         <ul>
-          <li>sobre nyxaster</li>
+          <li>sobre MovieVerse</li>
           <li>contacto</li>
           <li>foros de ayuda</li>
           <li>api</li>
@@ -79,16 +79,16 @@ const Footer = () => {
         <ul>
           <li>directrices</li>
           <li>discuciones</li>
-          <li>tabla de clasificacion</li>
+          <li>tabla de clasificación</li>
           <li>twitter</li>
         </ul>
       </div>
       <div>
         <h2>legal</h2>
         <ul>
-          <li>termino de uso</li>
-          <li>terminos de uso de la API</li>
-          <li>politica de privacidad</li>
+          <li>término de uso</li>
+          <li>términos de uso de la API</li>
+          <li>política de privacidad</li>
         </ul>
       </div>
     </StyledFooter>

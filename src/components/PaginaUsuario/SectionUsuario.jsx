@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledGrid } from "../PaginaBusqueda/Grid";
+import Grid from "../Grid/Grid";
 import ItemUsuario from "./ItemUsuario";
 
 const StyledSection = styled.section`
@@ -13,7 +13,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const StyledGridUsuario = styled(StyledGrid)`
+const StyledGridUsuario = styled(Grid)`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
   @media (min-width: 850px) {

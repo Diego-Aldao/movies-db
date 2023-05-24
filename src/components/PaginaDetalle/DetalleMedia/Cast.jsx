@@ -87,7 +87,7 @@ const Cast = ({ cast }) => {
                   {persona.profile_path ? (
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${persona.profile_path}`}
-                      alt=""
+                      alt="imagen de una celebridad"
                     />
                   ) : (
                     <FailedImage />

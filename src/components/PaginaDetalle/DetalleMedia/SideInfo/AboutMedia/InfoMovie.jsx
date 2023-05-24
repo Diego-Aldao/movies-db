@@ -20,7 +20,7 @@ const InfoMovie = ({ dataMovie }) => {
   return (
     <StyledList>
       <li>
-        <span>titulo original</span>
+        <span>título original</span>
         <span>{original_title}</span>
       </li>
       <li>

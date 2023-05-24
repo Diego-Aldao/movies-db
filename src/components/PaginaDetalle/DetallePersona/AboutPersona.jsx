@@ -44,6 +44,10 @@ const StyledBiografia = styled.section`
     background: linear-gradient(to right, #0000002d, #000000);
     p {
       padding-inline: 10px;
+      cursor: pointer;
+    }
+    p:hover {
+      color: var(--color-principal);
     }
   }
 

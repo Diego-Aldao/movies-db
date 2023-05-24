@@ -16,7 +16,7 @@ const TopMovies = () => {
   return (
     <>
       {detalle && (
-        <SectionPage titulo={"peliculas mejor valoradas"}>
+        <SectionPage titulo={"películas mejor valoradas"}>
           {detalle.results.map((movie) => {
             const newMovie = { ...movie, media_type: "movie" };
             return (

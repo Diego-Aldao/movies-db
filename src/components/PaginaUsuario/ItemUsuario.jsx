@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledItem } from "../PaginaBusqueda/ItemBusqueda";
+import { StyledItem } from "../Grid/ItemGrid";
 import { Icon } from "@iconify/react";
 import { useEffect } from "react";
 import useGuardados from "../../hooks/useGuardados";
@@ -81,7 +81,10 @@ const ItemUsuario = ({ item }) => {
       <div className="main-info" onClick={handleNavigate}>
         <div className="imagen-item">
           {item.imagen ? (
-            <img src={`${URL}${item.imagen}`} alt="" />
+            <img
+              src={`${URL}${item.imagen}`}
+              alt="imagen de una pelicula, serie o celebridad"
+            />
           ) : (
             <FailedImage />
           )}

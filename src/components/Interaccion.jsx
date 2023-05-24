@@ -14,6 +14,7 @@ const StyledInteraccion = styled.span`
     width: 25px;
     height: 25px;
     color: var(--color-principal);
+    cursor: pointer;
   }
 `;
 

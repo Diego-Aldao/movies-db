@@ -10,10 +10,11 @@ const StyledLogo = styled(Link)`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-transform: capitalize;
 `;
 
 const Logo = () => {
-  return <StyledLogo to="/">Nyxaster</StyledLogo>;
+  return <StyledLogo to="/">movieVerse</StyledLogo>;
 };
 
 export default Logo;

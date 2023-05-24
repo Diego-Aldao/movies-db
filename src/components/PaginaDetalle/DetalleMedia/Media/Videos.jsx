@@ -49,7 +49,10 @@ const Videos = ({ data, setCurrentVideo, setIsVisible }) => {
 
   return (
     <StyledContenedor onClick={handleClick}>
-      <img src={URL} alt="" />
+      <img
+        src={URL}
+        alt="imagen placeholder de un video sobre una pelicula o serie"
+      />
       <StyledButton className="boton-play">
         <Icon icon="tabler:player-play-filled" />
       </StyledButton>

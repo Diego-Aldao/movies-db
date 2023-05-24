@@ -83,7 +83,7 @@ const Similares = ({ dataSimilares }) => {
                   {backdrop_path ? (
                     <img
                       src={`https://image.tmdb.org/t/p/w300/${backdrop_path}`}
-                      alt=""
+                      alt="imagen de una pelicula o serie similar a la pelicula o serie principal de esta pagina"
                     />
                   ) : (
                     <FailedImage />

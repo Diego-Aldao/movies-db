@@ -124,7 +124,7 @@ const ItemHeader = ({ movieId }) => {
               />
               <img
                 src={`https://image.tmdb.org/t/p/w1280${mainInfo?.backdrop_path}`}
-                alt=""
+                alt="imagen de una pelicula"
               />
             </picture>
           </div>
