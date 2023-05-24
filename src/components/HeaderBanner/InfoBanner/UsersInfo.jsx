@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
-import Interaccion from "../../../../Interaccion";
+import Interaccion from "../../Interaccion";
+import getFecha from "../../../helpers/getFecha";
 
 const StyledUsersInfo = styled.div`
   display: flex;
@@ -25,11 +26,19 @@ const UsersInfo = ({ userInfo }) => {
 
   const votoFixed = vote_average.toFixed(1);
 
+  const descripcion =
+    userInfo.overview ||
+    "Aun no cuenta con una descripción disponible en español";
+
+  const fecha = userInfo.first_air_date || userInfo.release_date;
+
+  const fechaFormateada = getFecha(fecha);
+
   const objetoInteraccion = {
     imagen: userInfo.poster_path || userInfo.backdrop_path,
     titulo: userInfo.title || userInfo.name,
-    descripcion: userInfo.overview,
-    subtitulo: userInfo.first_air_date || userInfo.release_date,
+    descripcion: descripcion,
+    subtitulo: fechaFormateada,
     id: userInfo.id,
     media: userInfo.media_type,
   };

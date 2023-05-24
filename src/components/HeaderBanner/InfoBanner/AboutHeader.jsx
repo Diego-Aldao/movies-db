@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import getDuracion from "../../../../../helpers/getDuracion";
+import getDuracion from "../../../helpers/getDuracion";
 
 const StyledAbout = styled.div`
   ul {

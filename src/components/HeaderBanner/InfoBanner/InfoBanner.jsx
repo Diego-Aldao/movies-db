@@ -1,9 +1,4 @@
 import styled from "styled-components";
-import UsersInfo from "./UsersInfo";
-import Descripcion from "./Descripcion";
-import Providers from "./Providers";
-import Creadores from "./Creadores";
-import AboutHeader from "./AboutHeader";
 
 const StyledInfo = styled.div`
   max-width: 1400px;
@@ -44,24 +39,18 @@ const StyledInfo = styled.div`
   }
 `;
 
-const InfoHeader = ({ dataInfo }) => {
-  const { poster_path, overview, created_by } = dataInfo;
-  const providers = dataInfo["watch/providers"].results;
-
+const InfoBanner = ({ imagen, children }) => {
   return (
     <StyledInfo>
       <div className="poster">
-        <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt="" />
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${imagen}`}
+          alt="poster de una pelicula o serie"
+        />
       </div>
-      <div className="contenedor-info">
-        <UsersInfo userInfo={dataInfo} />
-        <AboutHeader dataAbout={dataInfo} />
-        <Descripcion descripcion={overview} />
-        <Providers providers={providers} />
-        <Creadores creadores={created_by} />
-      </div>
+      <div className="contenedor-info">{children}</div>
     </StyledInfo>
   );
 };
 
-export default InfoHeader;
+export default InfoBanner;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
-const StyledHeaderMobile = styled.header`
+
+export const StyledHeaderMobile = styled.header`
   width: 100%;
   background: ${({ background }) => `url(${background})`} no-repeat center /
     cover;
@@ -26,17 +27,19 @@ const StyledHeaderMobile = styled.header`
   }
 `;
 
-const BannerMobile = ({ imagenes }) => {
+const HeaderBannerMobile = ({ imagenes }) => {
   const { imagenBg, imagenPoster } = imagenes;
   const imagenBackground = `https://image.tmdb.org/t/p/w400/${imagenBg}`;
-
   return (
     <StyledHeaderMobile background={imagenBackground}>
       <div className="poster">
-        <img src={`https://image.tmdb.org/t/p/w200/${imagenPoster}`} alt="" />
+        <img
+          src={`https://image.tmdb.org/t/p/w200/${imagenPoster}`}
+          alt="poster de una pelicula o serie"
+        />
       </div>
     </StyledHeaderMobile>
   );
 };
 
-export default BannerMobile;
+export default HeaderBannerMobile;

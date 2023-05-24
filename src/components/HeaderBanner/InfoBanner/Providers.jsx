@@ -31,7 +31,7 @@ const Providers = ({ providers }) => {
             <li key={provider.provider_id}>
               <img
                 src={`https://image.tmdb.org/t/p/w92${provider.logo_path}`}
-                alt=""
+                alt="provedor de peliculas o series"
               />
             </li>
           ))}

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { departamentos } from "../../Utils/Traducciones";
 import { useNavigate } from "react-router-dom";
 import FailedImage from "../FailedImage";
+import getFecha from "../../helpers/getFecha";
 
 export const StyledItem = styled.div`
   width: 100%;
@@ -45,7 +46,7 @@ export const StyledItem = styled.div`
 
 const URL = "https://image.tmdb.org/t/p/w200";
 
-const ItemBusqueda = ({ resultado, propsMedia }) => {
+const ItemGrid = ({ data, propsMedia }) => {
   const navigate = useNavigate();
   const {
     known_for,
@@ -58,7 +59,8 @@ const ItemBusqueda = ({ resultado, propsMedia }) => {
     overview,
     media_type,
     id,
-  } = resultado;
+    first_air_date,
+  } = data;
 
   const roles = known_for?.map((rol) => rol.title).join(", ");
 
@@ -66,7 +68,11 @@ const ItemBusqueda = ({ resultado, propsMedia }) => {
 
   const titulo = name || title;
 
-  const subtitulo = departamentos[known_for_department] || release_date;
+  const fecha = release_date || first_air_date;
+
+  const fechaFormateada = getFecha(fecha);
+
+  const subtitulo = departamentos[known_for_department] || fechaFormateada;
 
   const descripcion = overview || roles;
 
@@ -77,9 +83,16 @@ const ItemBusqueda = ({ resultado, propsMedia }) => {
   };
 
   return (
-    <StyledItem key={resultado.id} onClick={handleClick}>
+    <StyledItem key={data.id} onClick={handleClick}>
       <div className="imagen-item">
-        {imagen ? <img src={`${URL}${imagen}`} alt="" /> : <FailedImage />}
+        {imagen ? (
+          <img
+            src={`${URL}${imagen}`}
+            alt="poster de una pelicula, serie o celebridad"
+          />
+        ) : (
+          <FailedImage />
+        )}
       </div>
       <div className="info-item">
         <h3>{titulo}</h3>
@@ -90,4 +103,4 @@ const ItemBusqueda = ({ resultado, propsMedia }) => {
   );
 };
 
-export default ItemBusqueda;
+export default ItemGrid;
