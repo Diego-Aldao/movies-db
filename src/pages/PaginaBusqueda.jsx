@@ -1,13 +1,27 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import LayoutPrincipal from "../Layout/LayoutPrincipal";
-import useDetalle from "../hooks/useDetalle";
-import { useEffect } from "react";
 
-import { useState } from "react";
-import Main from "../components/PaginaBusqueda/Main";
-import Filtros from "../components/PaginaBusqueda/Filtros";
-import Grid from "../components/PaginaBusqueda/Grid";
+import useDetalle from "../hooks/useDetalle";
+
+import LayoutPrincipal from "../Layout/LayoutPrincipal";
 import ScrollTop from "../components/ScrollTop";
+import MainPage from "../components/MainPage";
+import Header from "../components/PaginaBusqueda/Header";
+import Filtros from "../components/PaginaBusqueda/Filtros";
+import Grid from "../components/Grid/Grid";
+import ItemGrid from "../components/Grid/ItemGrid";
+
+import styled from "styled-components";
+
+const MainPageBusqueda = styled(MainPage)`
+  min-height: calc(100vh - 770px);
+  @media (min-width: 768px) {
+    min-height: calc(100vh - 510px);
+  }
+  @media (min-width: 1024px) {
+    min-height: calc(100vh - 370px);
+  }
+`;
 
 const PaginaBusqueda = () => {
   const params = useParams();
@@ -36,14 +50,23 @@ const PaginaBusqueda = () => {
   return (
     <LayoutPrincipal>
       <ScrollTop />
-      <Main params={params}>
+      <MainPageBusqueda>
+        <Header query={params.query} />
         {currentData && (
           <>
             <Filtros filtros={filtros} total={total} query={params.query} />
-            <Grid detalle={detalle} propsMedia={params.media} />
+            <Grid>
+              {detalle.results.map((resultado) => (
+                <ItemGrid
+                  data={resultado}
+                  key={resultado.id}
+                  propsMedia={params.media}
+                />
+              ))}
+            </Grid>
           </>
         )}
-      </Main>
+      </MainPageBusqueda>
     </LayoutPrincipal>
   );
 };
