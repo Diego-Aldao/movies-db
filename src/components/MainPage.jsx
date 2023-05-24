@@ -5,9 +5,11 @@ const StyledMain = styled.main`
   padding-inline: 10px;
   margin: 50px auto 0px;
   max-width: 1400px;
+
   @media (min-width: 768px) {
     padding-inline: 24px;
   }
+
   @media (min-width: 1024px) {
     padding-inline: 50px;
   }
