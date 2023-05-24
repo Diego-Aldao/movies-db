@@ -49,14 +49,14 @@ const NavDesktop = ({
           navigateTo={{
             categoria: "movie",
             subCategoria: "popular",
-            titulo: "peliculas",
+            titulo: "películas",
           }}
         />
         <NavLink
           navigateTo={{
             categoria: "tv",
             subCategoria: "popular",
-            titulo: "programas-de-television",
+            titulo: "programas-de-televisión",
           }}
         />
         <NavLink
@@ -73,18 +73,18 @@ const NavDesktop = ({
         {hayFavoritos ? (
           <span className="contador">
             <span>{hayFavoritos}</span>
-            <Icon icon="tabler:heart-filled" />
+            <Icon icon="tabler:heart-filled" onClick={handleNavigation} />
           </span>
         ) : (
-          <Icon icon="tabler:heart" />
+          <Icon icon="tabler:heart" onClick={handleNavigation} />
         )}
         {hayGuardados ? (
           <span className="contador">
             <span>{hayGuardados}</span>
-            <Icon icon="tabler:bookmark-filled" />
+            <Icon icon="tabler:bookmark-filled" onClick={handleNavigation} />
           </span>
         ) : (
-          <Icon icon="tabler:bookmark" />
+          <Icon icon="tabler:bookmark" onClick={handleNavigation} />
         )}
       </div>
     </StyledNavDesktop>
