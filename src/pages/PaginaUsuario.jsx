@@ -1,11 +1,17 @@
 import LayoutPrincipal from "../Layout/LayoutPrincipal";
-import Main from "../components/PaginaUsuario/Main";
 import Header from "../components/PaginaUsuario/Header";
 import SectionUsuario from "../components/PaginaUsuario/SectionUsuario";
 import useFavoritos from "../hooks/useFavoritos";
 import useGuardados from "../hooks/useGuardados";
 import SinContenido from "../components/PaginaUsuario/SinContenido";
 import ScrollTop from "../components/ScrollTop";
+import styled from "styled-components";
+import MainPage from "../components/MainPage";
+
+const MainPageUsuario = styled(MainPage)`
+  margin: 0 auto;
+  min-height: calc(100vh - 630px);
+`;
 
 const PaginaUsuario = () => {
   const { favoritos, guardarFavorito } = useFavoritos();
@@ -16,7 +22,7 @@ const PaginaUsuario = () => {
     <LayoutPrincipal>
       <ScrollTop />
       <Header />
-      <Main>
+      <MainPageUsuario>
         {hayContenido ? (
           <>
             <SectionUsuario
@@ -35,7 +41,7 @@ const PaginaUsuario = () => {
         ) : (
           <SinContenido />
         )}
-      </Main>
+      </MainPageUsuario>
     </LayoutPrincipal>
   );
 };

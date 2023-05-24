@@ -2,11 +2,22 @@ import { useEffect, useState } from "react";
 import LayoutPrincipal from "../Layout/LayoutPrincipal";
 import ContenedorFiltros from "../components/PaginaListas/Filtros/ContenedorFiltros";
 import Header from "../components/PaginaListas/Header";
-import MainListas from "../components/PaginaListas/MainListas";
 import useInitialData from "../hooks/useInitialData";
 import useFiltros from "../hooks/useFiltros";
 import ContenedorLista from "../components/PaginaListas/ContenedorLista";
 import ScrollTop from "../components/ScrollTop";
+import styled from "styled-components";
+import MainPage from "../components/MainPage";
+
+const MainPageListas = styled(MainPage)`
+  padding-block: 30px;
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    grid-gap: 30px;
+  }
+`;
 
 const PaginaListas = () => {
   const dataInicial = JSON.parse(localStorage.getItem("PaginaInicial"));
@@ -44,7 +55,7 @@ const PaginaListas = () => {
   return (
     <LayoutPrincipal>
       <ScrollTop />
-      <MainListas>
+      <MainPageListas>
         <Header>
           <h2>{`${newTitulo} ${subCategoria}es`}</h2>
         </Header>
@@ -69,7 +80,7 @@ const PaginaListas = () => {
             setDataSubCategoria={setDataSubCategoria}
           />
         )}
-      </MainListas>
+      </MainPageListas>
     </LayoutPrincipal>
   );
 };
