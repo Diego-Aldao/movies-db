@@ -2,6 +2,7 @@ import EstilosGlobales from "../styles/EstilosGlobales";
 import { FavoritosContextProvider } from "./Context/FavoritosContext";
 import { GuardadosContextProvider } from "./Context/GuardadosContext";
 import PaginaBusqueda from "./pages/PaginaBusqueda";
+import PaginaColeccion from "./pages/PaginaColeccion";
 import PaginaDetalle from "./pages/PaginaDetalle";
 import PaginaListas from "./pages/PaginaListas";
 import PaginaPrincipal from "./pages/PaginaPrincipal";
@@ -14,11 +15,11 @@ const router = createBrowserRouter([
     element: <PaginaPrincipal />,
   },
   {
-    path: "/peliculas/:lista",
+    path: "/películas/:lista",
     element: <PaginaListas />,
   },
   {
-    path: "/programas-de-television/:lista",
+    path: "/programas-de-televisión/:lista",
     element: <PaginaListas />,
   },
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/usuario",
     element: <PaginaUsuario />,
+  },
+  {
+    path: "/coleccion/:id",
+    element: <PaginaColeccion />,
   },
 ]);
 
