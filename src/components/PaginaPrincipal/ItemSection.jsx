@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Circle } from "rc-progress";
 import { departamentos } from "../../Utils/Traducciones.js";
 import FailedImage from "../FailedImage";
+import getFecha from "../../helpers/getFecha";
 
 const StyledItem = styled.div`
   display: flex;
@@ -102,11 +103,7 @@ const ItemSection = ({ itemData, mouseOver }) => {
 
   const fecha = release_date || first_air_date;
 
-  const fechaFormateada = new Date(fecha).toLocaleDateString("es-AR", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const fechaFormateada = getFecha(fecha);
 
   const colorPorcentaje =
     porcentaje === "-"

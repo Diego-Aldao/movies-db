@@ -3,6 +3,7 @@ import External from "../External";
 import { departamentos } from "../../../Utils/Traducciones";
 import Interaccion from "../../Interaccion";
 import FailedImage from "../../FailedImage";
+import getFecha from "../../../helpers/getFecha";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -135,6 +136,8 @@ const SideInfoPersona = ({ data }) => {
     ? "ups, parece que aun no hay una biografia en español de esta celebridad"
     : biography;
 
+  const fechaNacimiento = getFecha(birthday);
+
   const objetoInteraccion = {
     imagen: profile_path,
     titulo: name,
@@ -155,7 +158,7 @@ const SideInfoPersona = ({ data }) => {
             />
             <img
               src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-              alt=""
+              alt="imagen de una celebridad"
             />
           </picture>
         ) : (
@@ -183,7 +186,7 @@ const SideInfoPersona = ({ data }) => {
           </li>
           <li>
             <p>fecha de nacimiento</p>
-            <p>{birthday}</p>
+            <p>{fechaNacimiento}</p>
           </li>
           <li>
             <p>lugar de nacimiento</p>
