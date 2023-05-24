@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled, { css } from "styled-components";
 import useDetalle from "../../../hooks/useDetalle";
 import imgPlaceholder from "../../../assets/image-placeholder.svg";
+import { Link } from "react-router-dom";
 
 const StyledSection = styled.section`
   width: 100%;
@@ -38,20 +39,6 @@ const StyledSection = styled.section`
     h2 {
       font-size: 30px;
     }
-    button {
-      width: 50%;
-      max-width: 200px;
-      background: var(--color-principal);
-      border: 1px solid var(--color-principal);
-      padding-block: 15px;
-      border-radius: 5px;
-      span {
-        color: var(--bg-secundario);
-        text-transform: uppercase;
-        font-size: clamp(12px, 2vw, 14px);
-        font-weight: 800;
-      }
-    }
   }
   p:first-letter {
     text-transform: uppercase;
@@ -82,6 +69,22 @@ const StyledSection = styled.section`
   }
 `;
 
+const StyledLink = styled(Link)`
+  width: 50%;
+  max-width: 200px;
+  background: var(--color-principal);
+  border: 1px solid var(--color-principal);
+  padding-block: 15px;
+  border-radius: 5px;
+  text-align: center;
+  span {
+    color: var(--bg-secundario);
+    text-transform: uppercase;
+    font-size: clamp(12px, 2vw, 14px);
+    font-weight: 800;
+  }
+`;
+
 const Coleccion = ({ coleccion }) => {
   const { backdrop_path, name, id } = coleccion;
   const { detalle, getDetalle } = useDetalle();
@@ -107,10 +110,9 @@ const Coleccion = ({ coleccion }) => {
                 <span key={part.id}> {part.title} - </span>
               ))}
             </p>
-
-            <button>
+            <StyledLink to={`/coleccion/${id}`}>
               <span>ver la colección</span>
-            </button>
+            </StyledLink>
           </div>
         </StyledSection>
       )}
