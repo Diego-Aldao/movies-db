@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useEffect } from "react";
+import ItemGenero from "./ItemGenero";
 
 export const StyledFiltro = styled.div`
   background: var(--bg-secundario);
@@ -9,6 +10,7 @@ export const StyledFiltro = styled.div`
   align-self: start;
   width: 100%;
   h3 {
+    cursor: pointer;
     padding: 10px 15px;
     text-transform: capitalize;
     display: flex;
@@ -40,12 +42,6 @@ export const StyledFiltro = styled.div`
     flex-wrap: wrap;
     p {
       width: 100%;
-    }
-    span {
-      border-radius: 15px;
-      font-size: 14px;
-      padding: 5px 10px;
-      border: 1px solid var(--color-texto-terciario);
     }
   }
   @media (min-width: 645px) {
@@ -93,14 +89,11 @@ const ItemFiltro = ({ generos, setFiltros, filtros }) => {
         <div className="generos">
           <p className="subtitulo">generos</p>
           {generos.map((filtro) => (
-            <span
+            <ItemGenero
               key={filtro.id}
-              onClick={() => {
-                handleClick(filtro.id);
-              }}
-            >
-              {filtro.name}
-            </span>
+              handleClick={handleClick}
+              filtro={filtro}
+            />
           ))}
         </div>
       )}
