@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import { Circle } from "rc-progress";
 import FailedImage from "../FailedImage";
+import getPorcentaje from "../../helpers/getPorcentaje";
 
 const StyledItem = styled.div`
   display: flex;
@@ -9,10 +10,29 @@ const StyledItem = styled.div`
   background: var(--bg-secundario);
   border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
   .contenedor-img {
     width: 30%;
     position: relative;
-
+    .porcentaje {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      bottom: -10px;
+      left: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secundario);
+      color: var(--color-texto-principal);
+      border-radius: 50%;
+      text-transform: uppercase;
+      font-size: 12px;
+      span {
+        position: absolute;
+        display: block;
+      }
+    }
     span {
       display: none;
     }
@@ -60,22 +80,6 @@ const StyledItem = styled.div`
     height: auto;
     .contenedor-img {
       height: calc(100% - 96px);
-      span {
-        position: absolute;
-        left: 10px;
-        bottom: -10px;
-        background: var(--bg-principal);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border: 2px solid var(--color-principal);
-        border-radius: 50%;
-        font-size: 14px;
-        color: var(--color-texto-principal);
-        padding-top: 1px;
-      }
     }
 
     .info {
@@ -117,6 +121,17 @@ const ItemLista = ({ info }) => {
   const path_imagen = poster_path ? poster_path : profile_path;
   const air_date = release_date ? release_date : first_air_date;
 
+  const porcentaje = getPorcentaje(vote_average);
+
+  const colorPorcentaje =
+    porcentaje === "-"
+      ? "#a3a3a3"
+      : porcentaje >= 75
+      ? "#21d07a"
+      : porcentaje >= 45
+      ? "#d2d531"
+      : "#db2360";
+
   const handleClick = () => {
     navigate(`/detalle/${media_type}/${id}`);
   };
@@ -132,7 +147,18 @@ const ItemLista = ({ info }) => {
         ) : (
           <FailedImage />
         )}
-        {vote_average && <span>{vote_average}</span>}
+        {vote_average && (
+          <div className="porcentaje">
+            <span>{porcentaje}</span>
+            <Circle
+              percent={porcentaje}
+              strokeWidth={6}
+              strokeColor={colorPorcentaje}
+              trailWidth={3}
+              trailColor={"#dfdfdf"}
+            />
+          </div>
+        )}
       </div>
       <div className="info">
         <p className="titulo">{titulo}</p>
