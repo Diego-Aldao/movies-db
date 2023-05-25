@@ -9,7 +9,7 @@ const useGeneros = () => {
     setGeneros(response.genres);
   };
 
-  const getGeneros = () => {
+  const getGeneros = (url) => {
     const options = {
       method: "GET",
       headers: {
@@ -18,7 +18,7 @@ const useGeneros = () => {
       },
     };
 
-    fetch("https://api.themoviedb.org/3/genre/movie/list?language=es", options)
+    fetch(url, options)
       .then((response) => response.json())
       .then((response) => handleFetch(response))
       .catch((err) => console.error(err));
