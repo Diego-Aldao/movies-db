@@ -10,7 +10,7 @@ import ModalMobile from "./ModalMobile";
 
 const StyledNav = styled.div`
   width: 100%;
-  height: 50px;
+  height: 80px;
   position: fixed;
   top: 0px;
   left: 0px;
