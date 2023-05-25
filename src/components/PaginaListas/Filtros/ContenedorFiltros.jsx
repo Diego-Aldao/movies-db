@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import ItemSort from "./ItemSort";
 import useGeneros from "../../../hooks/useGeneros";
+import { useLocation } from "react-router-dom";
 
 const StyledContenedorFiltros = styled.div`
   display: flex;
@@ -50,11 +51,15 @@ const ContenedorFiltros = ({
   const { generos, getGeneros } = useGeneros();
   const dataInicial = JSON.parse(localStorage.getItem("PaginaInicial"));
   const { categoria } = dataInicial;
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    if (generosLS) return;
-    getGeneros();
-  }, []);
+    if (pathname.includes("pel%C3%ADculas")) {
+      getGeneros("https://api.themoviedb.org/3/genre/movie/list");
+    } else if (pathname.includes("programas-de-televisi%C3%B3n")) {
+      getGeneros("https://api.themoviedb.org/3/genre/tv/list");
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (!generos) return;
@@ -76,6 +81,7 @@ const ContenedorFiltros = ({
 
   const handleClick = () => {
     const newFiltros = { ...filtros, pagina: 1, categoria: categoria };
+    console.log(newFiltros);
     const url = `https://api.themoviedb.org/3/discover/${categoria}?include_adult=false&include_video=false&language=es-ES&page=${newFiltros.pagina}${filtros.sort}${filtros.generos}`;
     getListaFiltrada(url);
   };
