@@ -3,12 +3,13 @@ const styles = {
   control: (styles, state) => ({
     ...styles,
     backgroundColor: "var(--bg-secundario)",
-
+    cursor: "pointer",
     border: state.isFocused ? "red" : "aqua",
   }),
   singleValue: (base) => ({
     ...base,
     color: "var(--color-texto-principal)",
+    cursor: "pointer",
   }),
   menu: (styles) => ({
     ...styles,
@@ -27,6 +28,7 @@ const styles = {
     ":hover": {
       ...styles[":hover"],
       backgroundColor: "var(--color-principal)",
+      cursor: "pointer",
     },
   }),
 };

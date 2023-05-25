@@ -6,13 +6,18 @@ const StyledFiltros = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  padding-block: 10px;
+  padding-block: 20px;
   max-width: 500px;
   span {
     flex: 1 1 auto;
     text-align: center;
     text-transform: capitalize;
     color: var(--color-texto-principal);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  span:hover {
+    color: var(--color-principal);
   }
 `;
 

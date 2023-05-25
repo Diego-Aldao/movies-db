@@ -11,6 +11,7 @@ export const StyledItem = styled.div`
   height: 140px;
   border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
   .imagen-item {
     overflow: hidden;
     width: 93.33px;
