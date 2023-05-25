@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -25,6 +25,7 @@ const StyledBusqueda = styled.form`
     height: 100%;
     padding: 0px 10px;
     border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
     span {
       font-weight: 700;
       text-transform: uppercase;
@@ -64,6 +65,13 @@ const BarraBusqueda = ({ isVisible }) => {
   const [valor, setValor] = useState("");
   const navigate = useNavigate();
 
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    inputRef.current.focus();
+  }, [isVisible]);
+
   const handleSubmit = () => {
     navigate(`/busqueda/multi/${valor}`);
   };
@@ -76,6 +84,7 @@ const BarraBusqueda = ({ isVisible }) => {
     <StyledBusqueda isVisible={isVisible} onSubmit={handleSubmit}>
       <div className="contenedor-form">
         <input
+          ref={inputRef}
           onChange={handleChange}
           value={valor}
           type="text"
