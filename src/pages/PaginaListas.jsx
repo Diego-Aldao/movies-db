@@ -23,7 +23,6 @@ const PaginaListas = () => {
   const dataInicial = JSON.parse(localStorage.getItem("PaginaInicial"));
 
   const { url, titulo, categoria, subCategoria } = dataInicial;
-  const newTitulo = titulo.replaceAll("-", " ");
 
   const initialValue = JSON.parse(localStorage.getItem("InitialData"));
   const [dataSubCategoria, setDataSubCategoria] = useState(
@@ -56,9 +55,7 @@ const PaginaListas = () => {
     <LayoutPrincipal>
       <ScrollTop />
       <MainPageListas>
-        <Header>
-          <h2>{`${newTitulo} ${subCategoria}es`}</h2>
-        </Header>
+        <Header titulo={titulo} subCategoria={subCategoria} />
         {categoria !== "person" && (
           <ContenedorFiltros
             setDataSubCategoria={setDataSubCategoria}
