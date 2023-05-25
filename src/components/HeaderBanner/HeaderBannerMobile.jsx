@@ -4,7 +4,7 @@ export const StyledHeaderMobile = styled.header`
   width: 100%;
   background: ${({ background }) => `url(${background})`} no-repeat center /
     cover;
-  margin-top: 50px;
+  margin-top: 79px;
   position: relative;
   padding: 10px;
   &:after {

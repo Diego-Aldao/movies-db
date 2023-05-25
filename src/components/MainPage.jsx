@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledMain = styled.main`
   width: 100%;
   padding-inline: 10px;
-  margin: 50px auto 0px;
+  margin: 80px auto 0px;
   max-width: 1400px;
 
   @media (min-width: 768px) {
